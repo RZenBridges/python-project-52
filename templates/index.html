@@ -1,1 +1,22 @@
-<h1>The project is under construction</h1>
+<!DOCTYPE html>
+<html>
+{% include "head.html" %}
+<body class="d-flex flex-column min-vh-100">
+{% include "navigation.html" %}
+
+<div class="container wrapper flex-grow-1">
+  <h1 class="my-4"></h1>
+  <div class="card">
+    <div class="card-body p-5 bg-light">
+      <div class="display-4">Здравствуй, пользователь!</div>
+        <p class="lead">Здесь можно заниматься постановкой задач в команде</p>
+        <hr>
+        <a class="btn btn-primary btn-lg" href="#">Узнать больше об авторе</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+{% include "footer.html" %}
+</html>
