@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load i18n %}
 <html>
 {% include "head.html" %}
 <body class="d-flex flex-column min-vh-100">
@@ -8,8 +9,8 @@
   <h1 class="my-4"></h1>
   <div class="card">
     <div class="card-body p-5 bg-light">
-      <div class="display-4">Здравствуй, пользователь!</div>
-        <p class="lead">Здесь можно заниматься постановкой задач в команде</p>
+      <div class="display-4">{% translate greeting %}</div>
+        <p class="lead">{% translate info %}</p>
         <hr>
         <a class="btn btn-primary btn-lg" href="#">Узнать больше об авторе</a>
       </div>
