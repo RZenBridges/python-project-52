@@ -1,5 +1,11 @@
 start:
-	poetry run python3 task_manager/manage.py runserver
+	poetry run gunicorn -w 5 task_manager.wsgi:application
+
+dev:
+	poetry run python3 manage.py runserver
 
 lint:
 	poetry run python3 -m flake8 task_manager
+
+install:
+	poetry install
