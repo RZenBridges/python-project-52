@@ -18,14 +18,14 @@
         </tr>
       </thead>
       <tbody>
-        {% for item in items %}
+        {% for user in user_list %}
         <tr>
-          <td>{{ item.ID }}</td>
-          <td>dan</td>
-          <td>Dan Dan</td>
-          <td>07.06.2023 11:28</td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.first_name }} {{ user.last_name }}</td>
+          <td>{{ user.created_at }}</td>
           <td>
-            <a href="/users/1/update/">{% translate row_edit %}</a>
+            <a href="{% url 'user_update' pk=user.id%}">{% translate row_edit %}</a>
             <br>
             <a href="/users/1/delete/">{% translate row_delete %}</a>
           </td>
