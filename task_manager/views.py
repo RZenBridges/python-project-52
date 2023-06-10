@@ -72,12 +72,28 @@ class UsersUpdateView(TemplateView):
         form = UserForm(request.POST, instance=user)
         if form.is_valid:
             form.save()
+            messages.add_message(request, messages.INFO, "Пользователь успешно изменен")
             return redirect('users')
         return render(request, 'update.html', {'form': form, 'user_id': user_id})
 
 
 class UsersDeleteView(TemplateView):
-    pass
+
+    def get(self, request, *args, **kwargs):
+        user_id = kwargs.get('pk')
+        user = User.objects.get(id=user_id)
+        return render(request, 'delete.html', NAVIGATION | {
+            'user_id': user_id,
+            'fullname': f'{user.first_name} {user.last_name}'
+        })
+
+    def post(self, request, *args, **kwargs):
+        user_id = kwargs.get('pk')
+        user = User.objects.get(id=user_id)
+        if user:
+            user.delete()
+            messages.add_message(request, messages.INFO, "Пользователь успешно удален")
+        return redirect('users')
 
 
 class UsersLoginView(TemplateView):
