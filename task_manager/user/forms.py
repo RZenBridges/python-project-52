@@ -1,5 +1,7 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import User
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class UserForm(forms.ModelForm):
@@ -43,3 +45,12 @@ class UserForm(forms.ModelForm):
         if password != password_confirmation:
             return False
         return password_confirmation
+
+
+class InactiveUserAuthenticationForm(AuthenticationForm):
+
+    def confirm_login_allowed(self, user):
+        if not user.is_active:
+            raise ValidationError(
+                'This account is inactive',
+                code='inactive')
