@@ -15,7 +15,7 @@ NAVIGATION = {
     'tasks': _('Tasks'),
     'log_in': _('Log in'),
     'log_out': _('Log out'),
-    'register': _('Sign up')
+    'registration': _('Sign up')
 }
 
 

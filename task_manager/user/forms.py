@@ -1,5 +1,6 @@
 from django import forms
 from .models import User
+from django.utils.translation import gettext as _
 
 
 class UserForm(forms.ModelForm):
@@ -10,8 +11,9 @@ class UserForm(forms.ModelForm):
     password_confirmation = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
+                'label': _('Password Confirmation'),
                 'class': 'form-control',
-                'placeholder': 'Password confirmation'
+                'placeholder': _('Password (again)')
             }
         )
     )
@@ -21,20 +23,24 @@ class UserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'username', 'password')
         widgets = {
             'first_name': forms.TextInput(attrs={
+                'label': _('First Name'),
                 'class': 'form-control',
-                'placeholder': 'Name'
+                'placeholder': _('Name')
             }),
             'last_name': forms.TextInput(attrs={
+                'label': _('Last Name'),
                 'class': 'form-control',
-                'placeholder': 'Last Name'
+                'placeholder': _('Last Name')
             }),
             'username': forms.TextInput(attrs={
+                'username': _('User Name'),
                 'class': 'form-control',
-                'placeholder': 'User Name'
+                'placeholder': _('User Name')
             }),
             'password': forms.PasswordInput(attrs={
+                'label': _('Password'),
                 'class': 'form-control',
-                'placeholder': 'Password'
+                'placeholder': _('Password')
             })
         }
 

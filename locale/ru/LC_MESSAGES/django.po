@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-12 15:25+0000\n"
+"POT-Creation-Date: 2023-06-12 17:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,48 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: task_manager/forms.py:12 task_manager/user/forms.py:36
+#: task_manager/user/forms.py:38 templates/login.html:14
+#, fuzzy
+#| msgid "User name"
+msgid "User Name"
+msgstr "Имя пользователя"
+
+#: task_manager/forms.py:20 task_manager/user/forms.py:41
+#: task_manager/user/forms.py:43 templates/login.html:18
+msgid "Password"
+msgstr "Пароль"
+
+#: task_manager/user/forms.py:14
+#, fuzzy
+#| msgid "Password confirmation"
+msgid "Password Confirmation"
+msgstr "Подтверждение пароля"
+
+#: task_manager/user/forms.py:16
+#, fuzzy
+#| msgid "Password"
+msgid "Password(again)"
+msgstr "Пароль"
+
+#: task_manager/user/forms.py:26
+#, fuzzy
+#| msgid "User name"
+msgid "First Name"
+msgstr "Имя пользователя"
+
+#: task_manager/user/forms.py:28
+#, fuzzy
+#| msgid "User name"
+msgid "Name"
+msgstr "Имя"
+
+#: task_manager/user/forms.py:31 task_manager/user/forms.py:33
+#, fuzzy
+#| msgid "User name"
+msgid "Last Name"
+msgstr "Фамилия"
 
 #: task_manager/user/views.py:12 task_manager/views.py:11
 msgid "Task Manager"
@@ -41,6 +83,7 @@ msgid "Tasks"
 msgstr "Задачи"
 
 #: task_manager/user/views.py:17 task_manager/views.py:16
+#: templates/login.html:23
 msgid "Log in"
 msgstr "Вход"
 
@@ -54,7 +97,7 @@ msgstr "Регистрация"
 
 #: task_manager/user/views.py:28
 msgid "User name"
-msgstr "Имя пользователя"
+msgstr "Псевдоним"
 
 #: task_manager/user/views.py:29
 msgid "Full name"
@@ -121,3 +164,26 @@ msgstr ""
 #: task_manager/views.py:61
 msgid "You have logged out"
 msgstr "Вы разлогинены"
+
+#: templates/new_user.html:16
+msgid ""
+"Necessary field. 150 characters max. Only letters, digits and symbols @/./+/-"
+"_."
+msgstr ""
+"Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./"
+"+/-/_."
+
+#: templates/new_user.html:32
+msgid "Your password has to contain 3 characters at least."
+msgstr "Ваш пароль должен содержать как минимум 3 символа."
+
+#: templates/new_user.html:39
+msgid "For confirmation insert the password again, please."
+msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
+
+#: templates/new_user.html:42
+msgid "Register"
+msgstr "Зарегистрировать"
+
+#~ msgid "Password confirmation"
+#~ msgstr "Подтверждение пароля"
