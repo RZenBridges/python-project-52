@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
-from .user.forms import InactiveUserAuthenticationForm
+from .forms import InactiveUserAuthenticationForm
 from django.contrib import messages
-from django.contrib.auth import authenticate
+from django.contrib.auth import login, logout
+from .user.models import User
 
 
 NAVIGATION = {
@@ -35,10 +36,23 @@ class UsersLoginView(TemplateView):
         })
 
     def post(self, request, *args, **kwargs):
-        username = kwargs.get('username')
-        password = kwargs.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            return redirect('home')
-        messages.add_message(request, messages.ERROR, "inserted username or password is faulty")
+        try:
+            user = User.objects.get(username=request.POST.get('username'))
+            if user.check_password(request.POST.get('password')):
+                login(request, user)
+                messages.add_message(request, messages.INFO, "Вы залогинены")
+                return redirect('home')
+        except User.DoesNotExist:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "Пожалуйста, введите правильные имя пользователя и пароль. "\
+                "Оба поля могут быть чувствительны к регистру.")
         return redirect('login')
+
+
+class UsersLogoutView(TemplateView):
+
+    def post(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('home')

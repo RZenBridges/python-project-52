@@ -1,13 +1,13 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import User
-from django.contrib.auth.forms import AuthenticationForm
 
 
 class UserForm(forms.ModelForm):
     error_messages = {
         'password_mismatch': "Two passwords have to match."
     }
+
     password_confirmation = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
@@ -19,7 +19,7 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'password']
+        fields = ('first_name', 'last_name', 'username', 'password')
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -45,12 +45,3 @@ class UserForm(forms.ModelForm):
         if password != password_confirmation:
             return False
         return password_confirmation
-
-
-class InactiveUserAuthenticationForm(AuthenticationForm):
-
-    def confirm_login_allowed(self, user):
-        if not user.is_active:
-            raise ValidationError(
-                'This account is inactive',
-                code='inactive')

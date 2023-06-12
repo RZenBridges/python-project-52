@@ -10,29 +10,50 @@
       <li class="nav-item">
         <a class="nav-link" href="/users/">{% translate users %}</a>
       </li>
+      {% if request.user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="#">{% translate 'Статусы' %}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">{% translate 'Метки' %}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">{% translate 'Задачи' %}</a>
+      </li>
+      {% endif %}
     </ul>
+
     <ul class="navbar-nav">
+      {% if not request.user.is_authenticated %}
       <li class="nav-item">
         <a class="nav-link" href="/login/">{% translate log_in %}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/users/create/">{% translate register %}</a>
       </li>
+      {% else %}
+      <li class="nav-item">
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="nav-link btn btn-link">{% translate 'Выход' %}</button>
+        </form>
+      </li>
+      {% endif %}
     </ul>
   </div>
 </nav>
 
 {% if messages  %}
-  <div class="container wrapper flex-grow-2">
+  <div class="container wrapper flex-grow-1">
   {% for message in messages %}
     {% if message.tags == 'error' %}
-      <div class="alert alert-danger  alert-dismissible fade show" role="alert">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
     {% elif message.tags == 'info' %}
       <div class="alert alert-success alert-dismissible fade show" role="alert">
     {% endif %}
-    <button type="button" class="close" data-dismiss="alert" aria-label="close"">x</button>
-    {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-labelled="close">×</button>
+        {{ message }}
      </div>
   {% endfor %}
-  </div>
+</div>
 {% endif %}
