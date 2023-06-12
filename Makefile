@@ -1,5 +1,9 @@
+rallback_db:
+	poetry run python3 manage.py migrate user zero
+	poetry run python3 manage.py migrate
+
 migrate_db:
-        poetry run python3 manage.py makemigrations
+	poetry run python3 manage.py makemigrations
 	poetry run python3 manage.py migrate
 
 start:
