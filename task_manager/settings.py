@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-from django.utils.translation import gettext_lazy as _
 
 from dotenv import load_dotenv
 
@@ -121,12 +120,12 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 LANGUAGES = (
-    ('ru', _('Russian')),
-    ('en-us', _('English'))
+    ('ru', 'Russian'),
+    ('en-us', 'English')
 )
 
 LOCALE_PATHS = [
-    'ru'
+    os.path.join(BASE_DIR, 'locale')
 ]
 
 TIME_ZONE = 'UTC'

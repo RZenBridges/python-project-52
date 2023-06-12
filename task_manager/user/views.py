@@ -9,9 +9,13 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 NAVIGATION = {
-    'title': _('Task manager'),
+    'title': _('Task Manager'),
     'users': _('Users'),
+    'statuses': _('Statuses'),
+    'tags': _('Tags'),
+    'tasks': _('Tasks'),
     'log_in': _('Log in'),
+    'log_out': _('Log out'),
     'register': _('Sign up')
 }
 
@@ -42,10 +46,10 @@ class UsersCreateFormView(TemplateView):
         form = UserForm(request.POST)
         if form.is_valid() and form.clean_confirmation():
             form.save()
-            messages.add_message(request, messages.INFO, 'Пользователь успешно зарегистрирован')
+            messages.add_message(request, messages.INFO, _('The user has been registered'))
             return redirect('login')
 #       'Пользователь с таким именем уже существует'
-        messages.add_message(request, messages.ERROR, 'Проверьте данные')
+        messages.add_message(request, messages.ERROR, _('Check the inserted data'))
         return render(request, 'new_user.html', NAVIGATION | {'form': form})
 
 
@@ -61,12 +65,12 @@ class UsersUpdateView(TemplateView):
 
         elif request.user.is_anonymous:
             messages.add_message(request, messages.ERROR,
-                                 "Вы не авторизованы! Пожалуйста, выполните вход.")
+                                 _("You are not authenticated! Please, log in."))
             return redirect('login')
 
         else:
             messages.add_message(request, messages.ERROR,
-                                 "У вас нет прав для изменения другого пользователя.")
+                                 _("You are not authorized to change other users."))
             return redirect('users')
 
     @method_decorator(login_required)
@@ -76,7 +80,7 @@ class UsersUpdateView(TemplateView):
         form = UserForm(request.POST, instance=user)
         if form.is_valid and request.user.id == user_id:
             form.save()
-            messages.add_message(request, messages.INFO, "Пользователь успешно изменен")
+            messages.add_message(request, messages.INFO, _("The user has been updated"))
             login(request, user)
             return redirect('users')
         return render(request, 'update.html', {'form': form, 'user_id': user_id})
@@ -96,11 +100,11 @@ class UsersDeleteView(TemplateView):
 
         elif request.user.is_anonymous:
             messages.add_message(request, messages.ERROR,
-                                 "Вы не авторизованы! Пожалуйста, выполните вход.")
+                                 _("You are not authenticated! Please, log in."))
             return redirect('login')
 
         messages.add_message(request, messages.ERROR,
-                             "У вас нет прав для изменения другого пользователя.")
+                             _("You are not authorized to change other users."))
         return redirect('users')
 
     @method_decorator(login_required)
@@ -109,5 +113,5 @@ class UsersDeleteView(TemplateView):
         user = User.objects.get(id=user_id)
         if user and request.user.id == user_id:
             user.delete()
-            messages.add_message(request, messages.INFO, "Пользователь успешно удален")
+            messages.add_message(request, messages.INFO, _("The user has been deleteed"))
         return redirect('users')

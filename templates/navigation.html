@@ -12,13 +12,13 @@
       </li>
       {% if request.user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="#">{% translate 'Статусы' %}</a>
+        <a class="nav-link" href="#">{% translate statuses %}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">{% translate 'Метки' %}</a>
+        <a class="nav-link" href="#">{% translate tags %}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">{% translate 'Задачи' %}</a>
+        <a class="nav-link" href="#">{% translate tasks %}</a>
       </li>
       {% endif %}
     </ul>
@@ -35,7 +35,7 @@
       <li class="nav-item">
         <form method="post" action="{% url 'logout' %}">
           {% csrf_token %}
-          <button type="submit" class="nav-link btn btn-link">{% translate 'Выход' %}</button>
+          <button type="submit" class="nav-link btn btn-link">{% translate log_out %}</button>
         </form>
       </li>
       {% endif %}

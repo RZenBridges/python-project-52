@@ -8,9 +8,13 @@ from .user.models import User
 
 
 NAVIGATION = {
-    'title': _('Task manager'),
+    'title': _('Task Manager'),
     'users': _('Users'),
+    'statuses': _('Statuses'),
+    'tags': _('Tags'),
+    'tasks': _('Tasks'),
     'log_in': _('Log in'),
+    'log_out': _('Log out'),
     'register': _('Sign up')
 }
 
@@ -40,14 +44,13 @@ class UsersLoginView(TemplateView):
             user = User.objects.get(username=request.POST.get('username'))
             if user.check_password(request.POST.get('password')):
                 login(request, user)
-                messages.add_message(request, messages.INFO, "Вы залогинены")
+                messages.add_message(request, messages.INFO, _('You have logged in'))
                 return redirect('home')
         except User.DoesNotExist:
             messages.add_message(
                 request,
                 messages.ERROR,
-                "Пожалуйста, введите правильные имя пользователя и пароль. "
-                "Оба поля могут быть чувствительны к регистру.")
+                _("Enter correct username and password. Both fields can becase-sensitive"))
         return redirect('login')
 
 
@@ -55,4 +58,5 @@ class UsersLogoutView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         logout(request)
+        messages.add_message(request, messages.INFO, _('You have logged out'))
         return redirect('home')

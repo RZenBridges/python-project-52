@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-12 15:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: task_manager/user/views.py:12 task_manager/views.py:11
+msgid "Task Manager"
+msgstr "Менеджер задач"
+
+#: task_manager/user/views.py:13 task_manager/views.py:12
+msgid "Users"
+msgstr "Пользователи"
+
+#: task_manager/user/views.py:14 task_manager/views.py:13
+msgid "Statuses"
+msgstr "Статусы"
+
+#: task_manager/user/views.py:15 task_manager/views.py:14
+msgid "Tags"
+msgstr "Метки"
+
+#: task_manager/user/views.py:16 task_manager/views.py:15
+msgid "Tasks"
+msgstr "Задачи"
+
+#: task_manager/user/views.py:17 task_manager/views.py:16
+msgid "Log in"
+msgstr "Вход"
+
+#: task_manager/user/views.py:18 task_manager/views.py:17
+msgid "Log out"
+msgstr "Выход"
+
+#: task_manager/user/views.py:19 task_manager/views.py:18
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: task_manager/user/views.py:28
+msgid "User name"
+msgstr "Имя пользователя"
+
+#: task_manager/user/views.py:29
+msgid "Full name"
+msgstr "Полное имя"
+
+#: task_manager/user/views.py:30
+msgid "Created at"
+msgstr "Дата создания"
+
+#: task_manager/user/views.py:31
+msgid "Edit"
+msgstr "Изменить"
+
+#: task_manager/user/views.py:32
+msgid "Delete"
+msgstr "Удалить"
+
+#: task_manager/user/views.py:49
+msgid "The user has been registered"
+msgstr "Пользователь успешно зарегистрирован"
+
+#: task_manager/user/views.py:52
+msgid "Check the inserted data"
+msgstr "Проверьте данные"
+
+#: task_manager/user/views.py:68 task_manager/user/views.py:103
+msgid "You are not authenticated! Please, log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: task_manager/user/views.py:73 task_manager/user/views.py:107
+msgid "You are not authorized to change other users."
+msgstr "У вас нет прав для изменения другого пользователя."
+
+#: task_manager/user/views.py:83
+msgid "The user has been updated"
+msgstr "Пользователь успешно изменен"
+
+#: task_manager/user/views.py:116
+msgid "The user has been deleteed"
+msgstr "Пользователь успешно удален"
+
+#: task_manager/views.py:26
+msgid "Hello, User!"
+msgstr "Здравствуй, пользователь!"
+
+#: task_manager/views.py:27
+msgid "Here you can set tasks to the team"
+msgstr "Здесь можно ставить задачи для команды"
+
+#: task_manager/views.py:28
+msgid "Learn more about the author"
+msgstr "Узнать об авторе"
+
+#: task_manager/views.py:47
+msgid "You have logged in"
+msgstr "Вы залогинены"
+
+#: task_manager/views.py:53
+msgid "Enter correct username and password. Both fields can becase-sensitive"
+msgstr ""
+"Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут "
+"быть чувствительны к регистру."
+
+#: task_manager/views.py:61
+msgid "You have logged out"
+msgstr "Вы разлогинены"
