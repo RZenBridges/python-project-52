@@ -1,5 +1,5 @@
 migrate_db:
-	poetry run python3 manage.py migrate user
+	poetry run python3 manage.py migrate
 
 start:
 	poetry run gunicorn -w 5 task_manager.wsgi:application
