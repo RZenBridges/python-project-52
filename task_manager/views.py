@@ -46,7 +46,7 @@ class UsersLoginView(TemplateView):
             messages.add_message(
                 request,
                 messages.ERROR,
-                "Пожалуйста, введите правильные имя пользователя и пароль. "\
+                "Пожалуйста, введите правильные имя пользователя и пароль. "
                 "Оба поля могут быть чувствительны к регистру.")
         return redirect('login')
 
