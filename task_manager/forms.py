@@ -25,7 +25,6 @@ class InactiveUserAuthenticationForm(AuthenticationForm):
     class Meta:
         fields = ('username', 'password')
 
-
     def confirm_login_allowed(self, user):
         if not user.is_active:
             raise ValidationError(
