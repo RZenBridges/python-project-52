@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load bootstrap4 i18n %}
+<html>
+{% include "head.html" %}
+
+<body class="d-flex flex-column min-vh-100">
+
+{% include "navigation.html" %}
+
+<div class="container wrapper flex-grow-1">
+  {% block content %}
+  {% endblock %}
+</div>
+
+</body>
+
+{% include "footer.html" %}
+</html>

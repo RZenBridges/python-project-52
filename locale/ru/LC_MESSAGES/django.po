@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-13 09:39+0000\n"
+"POT-Creation-Date: 2023-06-13 10:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,12 +20,12 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: task_manager/forms.py:11 task_manager/forms.py:13
+#: task_manager/forms.py:12 task_manager/forms.py:14
 #: task_manager/user/forms.py:36 task_manager/user/forms.py:38
 msgid "Username"
 msgstr "Псевдоним"
 
-#: task_manager/forms.py:20 task_manager/forms.py:22
+#: task_manager/forms.py:21 task_manager/forms.py:23
 #: task_manager/user/forms.py:41 task_manager/user/forms.py:43
 msgid "Password"
 msgstr "Пароль"
@@ -61,7 +61,7 @@ msgid "Tasks"
 msgstr "Задачи"
 
 #: task_manager/status/views.py:16 task_manager/user/views.py:17
-#: task_manager/views.py:16 templates/login.html:23
+#: task_manager/views.py:16 templates/login.html:19
 msgid "Log in"
 msgstr "Вход"
 
@@ -186,35 +186,35 @@ msgstr "Вы разлогинены"
 msgid "user"
 msgstr "пользователь"
 
-#: templates/statuses/delete_status.html:9
+#: templates/statuses/delete_status.html:6
 msgid "Status deletion"
 msgstr "Удаление статуса"
 
-#: templates/statuses/delete_status.html:10
+#: templates/statuses/delete_status.html:7
 msgid "Are you certain you want to delete the status"
 msgstr "Вы уверены что хотите удалить статус"
 
-#: templates/statuses/delete_status.html:13
+#: templates/statuses/delete_status.html:10
 msgid "Yes, I am"
 msgstr "Да, удалить"
 
-#: templates/statuses/new_status.html:9 templates/statuses/statuses.html:10
+#: templates/statuses/new_status.html:5 templates/statuses/statuses.html:6
 msgid "Create status"
 msgstr "Создать статус"
 
-#: templates/statuses/new_status.html:18
+#: templates/statuses/new_status.html:14
 msgid "Create"
 msgstr "Создать"
 
-#: templates/statuses/update_status.html:9
+#: templates/statuses/update_status.html:5
 msgid "Update status"
 msgstr "Изменить статус"
 
-#: templates/statuses/update_status.html:18
+#: templates/statuses/update_status.html:14
 msgid "Update"
 msgstr "Обновить"
 
-#: templates/users/new_user.html:16
+#: templates/users/new_user.html:12
 msgid ""
 "Necessary field. 150 characters max. Only letters, digits and symbols @/./+/-"
 "_."
@@ -222,17 +222,14 @@ msgstr ""
 "Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./"
 "+/-/_."
 
-#: templates/users/new_user.html:32
+#: templates/users/new_user.html:28
 msgid "Your password has to contain 3 characters at least."
 msgstr "Ваш пароль должен содержать как минимум 3 символа."
 
-#: templates/users/new_user.html:39
+#: templates/users/new_user.html:35
 msgid "For confirmation insert the password again, please."
 msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
 
-#: templates/users/new_user.html:42
+#: templates/users/new_user.html:38
 msgid "Register"
 msgstr "Зарегистрировать"
-
-#~ msgid "User Name"
-#~ msgstr "Псевдоним"

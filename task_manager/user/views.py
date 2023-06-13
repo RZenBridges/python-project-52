@@ -64,7 +64,7 @@ class UsersUpdateView(TemplateView):
             user = User.objects.get(id=user_id)
             form = UserForm(instance=user)
             return render(request,
-                          'users/update.html',
+                          'users/update_user.html',
                           NAVIGATION | {'form': form, 'user_id': user_id})
 
         elif request.user.is_anonymous:
@@ -87,7 +87,7 @@ class UsersUpdateView(TemplateView):
             messages.add_message(request, messages.SUCCESS, _("The user has been updated"))
             login(request, user)
             return redirect('users')
-        return render(request, 'users/update.html', {'form': form, 'user_id': user_id})
+        return render(request, 'users/update_user.html', {'form': form, 'user_id': user_id})
 
 
 # DELETE USER page
@@ -97,7 +97,7 @@ class UsersDeleteView(TemplateView):
         user_id = kwargs.get('pk')
         if request.user.id == user_id:
             user = User.objects.get(id=user_id)
-            return render(request, 'users/delete.html', NAVIGATION | {
+            return render(request, 'users/delete_user.html', NAVIGATION | {
                 'user_id': user_id,
                 'fullname': f'{user.first_name} {user.last_name}'
             })

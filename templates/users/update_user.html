@@ -1,31 +1,27 @@
-<!DOCTYPE html>
-{% load i18n %}
-<html>
-{% include "head.html" %}
-<body class="d-flex flex-column min-vh-100">
-{% include "navigation.html" %}
-
+{% extends '../layout.html' %}
+{% load bootstrap4 i18n %}
+{% block content %}
   <div class="container wrapper flex-grow-1">
     <h1 class="my-4">Изменение пользователя</h1>
     <form method="post">
       {% csrf_token %}
 
       <div class="form-group">
-        {{ form.first_name.label_tag }}
+        {% translate form.first_name.label %}
         {{ form.first_name }}
         <small class="form-text text-muted">Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.
         </small>
       </div>
       <div class="form-group">
-        {{ form.last_name.label_tag }}
+        {% translate form.last_name.label %}
         {{ form.last_name }}
       </div>
       <div class="form-group">
-        {{ form.username.label_tag }}
+        {% translate form.username.label %}
         {{ form.username }}
       </div>
       <div class="form-group">
-        {{ form.password.label_tag }}
+        {% translate form.password.label %}
         {{ form.password }}
         <small class="form-text text-muted">
           <ul>
@@ -34,7 +30,7 @@
         </small>
       </div>
       <div class="form-group">
-        {{ form.password_confirmation.label_tag }}
+        {% translate form.password_confirmation.label %}
         {{ form.password_confirmation }}
         <small class="form-text text-muted">Для подтверждения введите, пожалуйста, пароль ещё раз.</small>
       </div>
@@ -43,7 +39,4 @@
       </div>
     </form>
   </div>
-
-{% include "footer.html" %}
-</body>
-</html>
+{% endblock content %}
