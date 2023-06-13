@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class StatusForm(forms.ModelForm):
+
     class Meta:
         model = Status
         fields = ('name', )
@@ -14,3 +15,13 @@ class StatusForm(forms.ModelForm):
                 'placeholder': _('Status Name')
             })
         }
+
+    def clean_name(self):
+        data = self.cleaned_data.get('name')
+
+        try:
+            Status.objects.get(name=data)
+        except Status.DoesNotExist:
+            raise forms.ValidationError('Status has to be unique')
+        finally:
+            return data

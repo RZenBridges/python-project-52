@@ -46,12 +46,10 @@ class UsersCreateFormView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = UserForm(request.POST)
-        if form.is_valid() and form.clean_confirmation():
+        if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, _('The user has been registered'))
             return redirect('login')
-#       'Пользователь с таким именем уже существует'
-        messages.add_message(request, messages.ERROR, _('Check the inserted data'))
         return render(request, 'users/new_user.html', NAVIGATION | {'form': form})
 
 
@@ -82,17 +80,19 @@ class UsersUpdateView(TemplateView):
         user_id = kwargs.get('pk')
         user = User.objects.get(id=user_id)
         form = UserForm(request.POST, instance=user)
-        if form.is_valid and request.user.id == user_id:
+        if form.is_valid() and request.user.id == user_id:
             form.save()
             messages.add_message(request, messages.SUCCESS, _("The user has been updated"))
             login(request, user)
             return redirect('users')
-        return render(request, 'users/update_user.html', {'form': form, 'user_id': user_id})
+        return render(request, 'users/update_user.html',
+                      NAVIGATION | {'form': form, 'user_id': user_id})
 
 
 # DELETE USER page
 class UsersDeleteView(TemplateView):
 
+    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         user_id = kwargs.get('pk')
         if request.user.id == user_id:

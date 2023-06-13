@@ -1,12 +1,10 @@
+import re
 from django import forms
 from .models import User
 from django.utils.translation import gettext_lazy as _
 
 
 class UserForm(forms.ModelForm):
-    error_messages = {
-        'password_mismatch': "Two passwords have to match."
-    }
 
     password_confirmation = forms.CharField(
         widget=forms.PasswordInput(
@@ -44,9 +42,26 @@ class UserForm(forms.ModelForm):
             })
         }
 
-    def clean_confirmation(self):
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        if len(password) < 3:
+            raise forms.ValidationError('The password is too short')
+        return password
+
+    def clean_password_confirmation(self):
         password = self.cleaned_data.get('password')
         password_confirmation = self.cleaned_data.get('password_confirmation')
         if password != password_confirmation:
-            return False
+            raise forms.ValidationError('Has to match the password')
         return password_confirmation
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if not re.fullmatch(r'^[\w@\+\-\.]+', username):
+            raise forms.ValidationError('Has forbidden characters')
+        try:
+            User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise forms.ValidationError('This username is already taken')
+        finally:
+            return username
