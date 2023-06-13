@@ -44,7 +44,7 @@ class UsersLoginView(TemplateView):
             user = User.objects.get(username=request.POST.get('username'))
             if user.check_password(request.POST.get('password')):
                 login(request, user)
-                messages.add_message(request, messages.INFO, _('You have logged in'))
+                messages.add_message(request, messages.SUCCESS, _('You have logged in'))
                 return redirect('home')
         except User.DoesNotExist:
             messages.add_message(

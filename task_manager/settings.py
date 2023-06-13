@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from django.contrib.messages import constants as message_constants
 
 from dotenv import load_dotenv
 
@@ -115,6 +116,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://python-project-52-production-bc05.up.railway.app'
+]
+
+MESSAGE_TAGS = {message_constants.ERROR: "danger"}
 
 
 LANGUAGE_CODE = 'en-us'

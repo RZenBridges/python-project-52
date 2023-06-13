@@ -46,7 +46,7 @@ class UsersCreateFormView(TemplateView):
         form = UserForm(request.POST)
         if form.is_valid() and form.clean_confirmation():
             form.save()
-            messages.add_message(request, messages.INFO, _('The user has been registered'))
+            messages.add_message(request, messages.SUCCESS, _('The user has been registered'))
             return redirect('login')
 #       'Пользователь с таким именем уже существует'
         messages.add_message(request, messages.ERROR, _('Check the inserted data'))
@@ -80,7 +80,7 @@ class UsersUpdateView(TemplateView):
         form = UserForm(request.POST, instance=user)
         if form.is_valid and request.user.id == user_id:
             form.save()
-            messages.add_message(request, messages.INFO, _("The user has been updated"))
+            messages.add_message(request, messages.SUCCESS, _("The user has been updated"))
             login(request, user)
             return redirect('users')
         return render(request, 'update.html', {'form': form, 'user_id': user_id})
@@ -113,5 +113,5 @@ class UsersDeleteView(TemplateView):
         user = User.objects.get(id=user_id)
         if user and request.user.id == user_id:
             user.delete()
-            messages.add_message(request, messages.INFO, _("The user has been deleteed"))
+            messages.add_message(request, messages.SUCCESS, _("The user has been deleted"))
         return redirect('users')
