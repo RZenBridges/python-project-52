@@ -31,8 +31,10 @@ class UsersView(TemplateView):
             'row_edit': _('Edit'),
             'row_delete': _('Delete'),
         }
-        users = User.objects.all()
-        return render(request, 'users.html', context={'user_list': users} | NAVIGATION | table)
+        users = User.objects.all().order_by('id')
+        return render(request,
+                      'users/users.html',
+                      context={'user_list': users} | NAVIGATION | table)
 
 
 # CREATE USER page
@@ -40,7 +42,7 @@ class UsersCreateFormView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         form = UserForm()
-        return render(request, 'new_user.html', NAVIGATION | {'form': form})
+        return render(request, 'users/new_user.html', NAVIGATION | {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = UserForm(request.POST)
@@ -50,7 +52,7 @@ class UsersCreateFormView(TemplateView):
             return redirect('login')
 #       'Пользователь с таким именем уже существует'
         messages.add_message(request, messages.ERROR, _('Check the inserted data'))
-        return render(request, 'new_user.html', NAVIGATION | {'form': form})
+        return render(request, 'users/new_user.html', NAVIGATION | {'form': form})
 
 
 # UPDATE USER page
@@ -61,7 +63,9 @@ class UsersUpdateView(TemplateView):
         if request.user.id == user_id:
             user = User.objects.get(id=user_id)
             form = UserForm(instance=user)
-            return render(request, 'update.html', NAVIGATION | {'form': form, 'user_id': user_id})
+            return render(request,
+                          'users/update.html',
+                          NAVIGATION | {'form': form, 'user_id': user_id})
 
         elif request.user.is_anonymous:
             messages.add_message(request, messages.ERROR,
@@ -83,7 +87,7 @@ class UsersUpdateView(TemplateView):
             messages.add_message(request, messages.SUCCESS, _("The user has been updated"))
             login(request, user)
             return redirect('users')
-        return render(request, 'update.html', {'form': form, 'user_id': user_id})
+        return render(request, 'users/update.html', {'form': form, 'user_id': user_id})
 
 
 # DELETE USER page
@@ -93,7 +97,7 @@ class UsersDeleteView(TemplateView):
         user_id = kwargs.get('pk')
         if request.user.id == user_id:
             user = User.objects.get(id=user_id)
-            return render(request, 'delete.html', NAVIGATION | {
+            return render(request, 'users/delete.html', NAVIGATION | {
                 'user_id': user_id,
                 'fullname': f'{user.first_name} {user.last_name}'
             })
@@ -110,8 +114,12 @@ class UsersDeleteView(TemplateView):
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
         user_id = kwargs.get('pk')
-        user = User.objects.get(id=user_id)
-        if user and request.user.id == user_id:
+        try:
+            user = User.objects.get(id=user_id)
             user.delete()
-            messages.add_message(request, messages.SUCCESS, _("The user has been deleted"))
+            messages.add_message(request, messages.SUCCESS,
+                                 _("The user has been deleted"))
+        except User.DoesNotExist:
+            messages.add_message(request, messages.ERROR,
+                                 _('You are not authorized for this action'))
         return redirect('users')

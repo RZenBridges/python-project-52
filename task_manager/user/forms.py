@@ -33,9 +33,9 @@ class UserForm(forms.ModelForm):
                 'placeholder': _('Last Name')
             }),
             'username': forms.TextInput(attrs={
-                'username': _('User Name'),
+                'label': _('Username'),
                 'class': 'form-control',
-                'placeholder': _('User Name')
+                'placeholder': _('Username')
             }),
             'password': forms.PasswordInput(attrs={
                 'label': _('Password'),

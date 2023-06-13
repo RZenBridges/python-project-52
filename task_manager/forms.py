@@ -8,16 +8,18 @@ class InactiveUserAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
+                'label': _('Username'),
                 'class': 'form-control',
-                'placeholder': _('User Name')
+                'placeholder': _('Username'),
             }
         )
     )
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
+                'label': _('Password'),
                 'class': 'form-control',
-                'placeholder': _('Password')
+                'placeholder': _('Password'),
             }
         )
     )

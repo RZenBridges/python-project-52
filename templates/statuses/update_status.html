@@ -6,26 +6,20 @@
 {% include "navigation.html" %}
 
   <div class="container wrapper flex-grow-1">
-    <h1 class="my-4">{% translate log_in %}</h1>
+    <h1 class="my-4">{% translate 'Update status' %}</h1>
     <form method="post">
       {% csrf_token %}
 
       <div class="form-group">
-        {% translate form.username.label %}
-        {{ form.username }}
+        {% translate form.name.label %}
+        {{ form.name }}
       </div>
       <div class="form-group">
-        {% translate form.password.label %}
-        {{ form.password }}
-      </div>
-
-      <div class="form-group">
-        <input class="btn btn-primary" type="submit" value="{% translate 'Log in' %}">
+        <input class="btn btn-primary" type="submit" value="{% translate 'Update' %}">
       </div>
     </form>
   </div>
 
-</body>
-
 {% include "footer.html" %}
+</body>
 </html>

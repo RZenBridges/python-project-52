@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-12 17:51+0000\n"
+"POT-Creation-Date: 2023-06-13 09:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,80 +20,105 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: task_manager/forms.py:12 task_manager/user/forms.py:36
-#: task_manager/user/forms.py:38 templates/login.html:14
-#, fuzzy
-#| msgid "User name"
-msgid "User Name"
-msgstr "Имя пользователя"
+#: task_manager/forms.py:11 task_manager/forms.py:13
+#: task_manager/user/forms.py:36 task_manager/user/forms.py:38
+msgid "Username"
+msgstr "Псевдоним"
 
-#: task_manager/forms.py:20 task_manager/user/forms.py:41
-#: task_manager/user/forms.py:43 templates/login.html:18
+#: task_manager/forms.py:20 task_manager/forms.py:22
+#: task_manager/user/forms.py:41 task_manager/user/forms.py:43
 msgid "Password"
 msgstr "Пароль"
 
+#: task_manager/status/forms.py:12 task_manager/status/forms.py:14
+#: task_manager/status/views.py:27
+msgid "Status Name"
+msgstr "Имя статуса"
+
+#: task_manager/status/views.py:11 task_manager/user/views.py:12
+#: task_manager/views.py:11
+msgid "Task Manager"
+msgstr "Менеджер задач"
+
+#: task_manager/status/views.py:12 task_manager/user/views.py:13
+#: task_manager/views.py:12
+msgid "Users"
+msgstr "Пользователи"
+
+#: task_manager/status/views.py:13 task_manager/user/views.py:14
+#: task_manager/views.py:13
+msgid "Statuses"
+msgstr "Статусы"
+
+#: task_manager/status/views.py:14 task_manager/user/views.py:15
+#: task_manager/views.py:14
+msgid "Tags"
+msgstr "Метки"
+
+#: task_manager/status/views.py:15 task_manager/user/views.py:16
+#: task_manager/views.py:15
+msgid "Tasks"
+msgstr "Задачи"
+
+#: task_manager/status/views.py:16 task_manager/user/views.py:17
+#: task_manager/views.py:16 templates/login.html:23
+msgid "Log in"
+msgstr "Вход"
+
+#: task_manager/status/views.py:17 task_manager/user/views.py:18
+#: task_manager/views.py:17
+msgid "Log out"
+msgstr "Выход"
+
+#: task_manager/status/views.py:18 task_manager/user/views.py:19
+#: task_manager/views.py:18
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: task_manager/status/views.py:28 task_manager/user/views.py:30
+msgid "Created at"
+msgstr "Дата создания"
+
+#: task_manager/status/views.py:29 task_manager/user/views.py:31
+msgid "Edit"
+msgstr "Изменить"
+
+#: task_manager/status/views.py:30 task_manager/user/views.py:32
+msgid "Delete"
+msgstr "Удалить"
+
+#: task_manager/status/views.py:63 task_manager/status/views.py:85
+#: task_manager/status/views.py:99
+msgid "Such status does not exist"
+msgstr "Такой статус не существует"
+
+#: task_manager/status/views.py:72
+msgid "The status has been updated"
+msgstr "Пользователь успешно изменен"
+
+#: task_manager/status/views.py:96
+msgid "The status has been deleted"
+msgstr "Пользователь успешно удален"
+
 #: task_manager/user/forms.py:14
-#, fuzzy
-#| msgid "Password confirmation"
 msgid "Password Confirmation"
 msgstr "Подтверждение пароля"
 
 #: task_manager/user/forms.py:16
-#, fuzzy
-#| msgid "Password"
-msgid "Password(again)"
-msgstr "Пароль"
+msgid "Password (again)"
+msgstr "Пароль (еще раз)"
 
 #: task_manager/user/forms.py:26
-#, fuzzy
-#| msgid "User name"
 msgid "First Name"
-msgstr "Имя пользователя"
+msgstr "Имя"
 
 #: task_manager/user/forms.py:28
-#, fuzzy
-#| msgid "User name"
 msgid "Name"
 msgstr "Имя"
 
 #: task_manager/user/forms.py:31 task_manager/user/forms.py:33
-#, fuzzy
-#| msgid "User name"
 msgid "Last Name"
 msgstr "Фамилия"
-
-#: task_manager/user/views.py:12 task_manager/views.py:11
-msgid "Task Manager"
-msgstr "Менеджер задач"
-
-#: task_manager/user/views.py:13 task_manager/views.py:12
-msgid "Users"
-msgstr "Пользователи"
-
-#: task_manager/user/views.py:14 task_manager/views.py:13
-msgid "Statuses"
-msgstr "Статусы"
-
-#: task_manager/user/views.py:15 task_manager/views.py:14
-msgid "Tags"
-msgstr "Метки"
-
-#: task_manager/user/views.py:16 task_manager/views.py:15
-msgid "Tasks"
-msgstr "Задачи"
-
-#: task_manager/user/views.py:17 task_manager/views.py:16
-#: templates/login.html:23
-msgid "Log in"
-msgstr "Вход"
-
-#: task_manager/user/views.py:18 task_manager/views.py:17
-msgid "Log out"
-msgstr "Выход"
-
-#: task_manager/user/views.py:19 task_manager/views.py:18
-msgid "Sign up"
-msgstr "Регистрация"
 
 #: task_manager/user/views.py:28
 msgid "User name"
@@ -103,41 +128,33 @@ msgstr "Псевдоним"
 msgid "Full name"
 msgstr "Полное имя"
 
-#: task_manager/user/views.py:30
-msgid "Created at"
-msgstr "Дата создания"
-
-#: task_manager/user/views.py:31
-msgid "Edit"
-msgstr "Изменить"
-
-#: task_manager/user/views.py:32
-msgid "Delete"
-msgstr "Удалить"
-
-#: task_manager/user/views.py:49
+#: task_manager/user/views.py:51
 msgid "The user has been registered"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/user/views.py:52
+#: task_manager/user/views.py:54
 msgid "Check the inserted data"
 msgstr "Проверьте данные"
 
-#: task_manager/user/views.py:68 task_manager/user/views.py:103
+#: task_manager/user/views.py:72 task_manager/user/views.py:107
 msgid "You are not authenticated! Please, log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: task_manager/user/views.py:73 task_manager/user/views.py:107
+#: task_manager/user/views.py:77 task_manager/user/views.py:111
 msgid "You are not authorized to change other users."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/user/views.py:83
+#: task_manager/user/views.py:87
 msgid "The user has been updated"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/user/views.py:116
-msgid "The user has been deleteed"
+#: task_manager/user/views.py:121
+msgid "The user has been deleted"
 msgstr "Пользователь успешно удален"
+
+#: task_manager/user/views.py:124
+msgid "You are not authorized for this action"
+msgstr "У вас нет прав для изменения другого пользователя."
 
 #: task_manager/views.py:26
 msgid "Hello, User!"
@@ -165,7 +182,39 @@ msgstr ""
 msgid "You have logged out"
 msgstr "Вы разлогинены"
 
-#: templates/new_user.html:16
+#: templates/navigation.html:36
+msgid "user"
+msgstr "пользователь"
+
+#: templates/statuses/delete_status.html:9
+msgid "Status deletion"
+msgstr "Удаление статуса"
+
+#: templates/statuses/delete_status.html:10
+msgid "Are you certain you want to delete the status"
+msgstr "Вы уверены что хотите удалить статус"
+
+#: templates/statuses/delete_status.html:13
+msgid "Yes, I am"
+msgstr "Да, удалить"
+
+#: templates/statuses/new_status.html:9 templates/statuses/statuses.html:10
+msgid "Create status"
+msgstr "Создать статус"
+
+#: templates/statuses/new_status.html:18
+msgid "Create"
+msgstr "Создать"
+
+#: templates/statuses/update_status.html:9
+msgid "Update status"
+msgstr "Изменить статус"
+
+#: templates/statuses/update_status.html:18
+msgid "Update"
+msgstr "Обновить"
+
+#: templates/users/new_user.html:16
 msgid ""
 "Necessary field. 150 characters max. Only letters, digits and symbols @/./+/-"
 "_."
@@ -173,17 +222,17 @@ msgstr ""
 "Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./"
 "+/-/_."
 
-#: templates/new_user.html:32
+#: templates/users/new_user.html:32
 msgid "Your password has to contain 3 characters at least."
 msgstr "Ваш пароль должен содержать как минимум 3 символа."
 
-#: templates/new_user.html:39
+#: templates/users/new_user.html:39
 msgid "For confirmation insert the password again, please."
 msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
 
-#: templates/new_user.html:42
+#: templates/users/new_user.html:42
 msgid "Register"
 msgstr "Зарегистрировать"
 
-#~ msgid "Password confirmation"
-#~ msgstr "Подтверждение пароля"
+#~ msgid "User Name"
+#~ msgstr "Псевдоним"
