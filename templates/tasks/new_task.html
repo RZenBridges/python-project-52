@@ -1,0 +1,34 @@
+{% extends '../layout.html' %}
+{% load bootstrap4 i18n %}
+{% block content %}
+  <div class="container wrapper flex-grow-1">
+    <h1 class="my-4">{% translate "Create task" %}</h1>
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="form-group">
+        {% translate form.name.label %}
+        {{ form.name }}
+      </div>
+
+      <div class="form-group">
+        {% translate form.body.label %}
+        {{ form.body }}
+      </div>
+
+      <div class="form-group">
+        {% translate form.status.label %}
+        {{ form.status }}
+      </div>
+
+      <div class="form-group">
+        {% translate form.performer.label %}
+        {{ form.performer }}
+      </div>
+
+      <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="{% translate 'Create' %}">
+      </div>
+    </form>
+  </div>
+{% endblock content %}
