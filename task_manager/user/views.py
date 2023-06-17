@@ -123,3 +123,4 @@ class UsersDeleteView(TemplateView):
             messages.add_message(request, messages.ERROR,
                                  _('You are not authorized for this action'))
         return redirect('users')
+        # Невозможно удалить пользователя, потому что он используется

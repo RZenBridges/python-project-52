@@ -3,3 +3,4 @@
 __pycache__
 db.sqlite3
 task_manager/settings/development.py
+migrations
