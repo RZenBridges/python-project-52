@@ -1,0 +1,33 @@
+{% extends '../layout.html' %}
+{% load bootstrap4 i18n %}
+{% block content %}
+  <div class="container wrapper flex-grow-1">
+    <h1 class="my-4">{% translate labels %}</h1>
+    <a class="nav-link" href="/statuses/create/">{% translate 'Create label' %}</a>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>{% translate column_name %}</th>
+          <th>{% translate column_created %}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for label in label_list %}
+        <tr>
+          <td>{{ label.id }}</td>
+          <td>{{ label.name }}</td>
+          <td>{{ label.created_at }}</td>
+          <td>
+            <a href="{% url 'label_update' pk=status.id %}">{% translate row_edit %}</a>
+            <br>
+            <a href="{% url 'label_delete' pk=status.id %}">{% translate row_delete %}</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock content %}
