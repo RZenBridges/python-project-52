@@ -134,3 +134,16 @@ class TaskDeleteView(LoginRequiredMixin, TemplateView):
             messages.add_message(request, messages.ERROR,
                                  _('Such task does not exist'))
         return redirect('tasks')
+
+
+class TaskViewView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        task_id = kwargs.get('pk')
+        try:
+            task = Task.objects.get(id=task_id)
+        except Task.DoesNotExist:
+            messages.add_message(request, messages.ERROR,
+                                 _('Such task does not exist'))
+        return render(request, 'tasks/view_task.html',
+                      NAVIGATION | {'task': task})
