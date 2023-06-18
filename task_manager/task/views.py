@@ -49,9 +49,7 @@ class TaskCreateFormView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         data = request.POST.copy()
         data['author'] = User.objects.get(id=request.user.id)
-        data['performer'] = User.objects.get(id=data['performer'])
 
-        print(data)
         form = TaskForm(data)
         if form.is_valid():
             form.save()

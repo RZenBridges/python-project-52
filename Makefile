@@ -1,7 +1,7 @@
 test:
 	poetry run python3 manage.py test
 
-rallback_db:
+rollback_db:
 	poetry run python3 manage.py migrate task zero
 	poetry run python3 manage.py migrate status zero
 	poetry run python3 manage.py migrate user zero

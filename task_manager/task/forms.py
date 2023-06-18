@@ -4,8 +4,6 @@ from task_manager.status.models import Status
 from task_manager.user.models import User
 from django.utils.translation import gettext_lazy as _
 
-CHOICES = [('1', 'First'), ('2', 'Second')]
-
 
 class TaskForm(forms.ModelForm):
 
@@ -13,14 +11,16 @@ class TaskForm(forms.ModelForm):
         label='status',
         queryset=Status.objects.all(),
         widget=forms.Select(attrs={'class': 'regDropDown form-control'}),
-        empty_label='----'
+        empty_label='----',
+        to_field_name='name',
     )
 
     performer = forms.ModelChoiceField(
         label='performer',
         queryset=User.objects.all(),
         widget=forms.Select(attrs={'class': 'regDropDown form-control'}),
-        empty_label='----'
+        empty_label='----',
+        to_field_name='first_name'
     )
 
     class Meta:
