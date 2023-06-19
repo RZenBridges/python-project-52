@@ -40,6 +40,14 @@
         {% endfor %}
 
       <div class="form-group">
+        {% translate form.labels.label %}
+        {{ form.labels }}
+      </div>
+        {% for error in form.labels.errors %}
+            <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
+        {% endfor %}
+
+      <div class="form-group">
         <input class="btn btn-primary" type="submit" value="{% translate 'Create' %}">
       </div>
     </form>

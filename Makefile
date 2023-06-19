@@ -3,6 +3,7 @@ test:
 
 rollback_db:
 	poetry run python3 manage.py migrate task zero
+	poetry run python3 manage.py migrate label zero
 	poetry run python3 manage.py migrate status zero
 	poetry run python3 manage.py migrate user zero
 	poetry run python3 manage.py makemigrations
@@ -13,7 +14,6 @@ migrate_db:
 	poetry run python3 manage.py migrate
 
 start:
-	poetry run python3 manage.py migrate
 	poetry run gunicorn -w 5 task_manager.wsgi:application
 
 dev:

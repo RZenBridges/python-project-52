@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
-from .models import Task
+from .models import Task, Labeled
+from task_manager.label.models import Label
 from .forms import TaskForm
 from task_manager.user.models import User
 from django.contrib import messages
@@ -53,6 +54,10 @@ class TaskCreateFormView(LoginRequiredMixin, TemplateView):
         form = TaskForm(data)
         if form.is_valid():
             form.save()
+            labels = data.getlist('labels')
+            for label in labels:
+                Labeled(task=Task.objects.get(name=data['name']),
+                        label=Label.objects.get(name=label)).save()
             return redirect('tasks')
         return render(request, 'tasks/new_task.html', {'form': form} | NAVIGATION)
 
@@ -84,13 +89,14 @@ class TaskUpdateView(LoginRequiredMixin, TemplateView):
                 return redirect('tasks')
 
             data = request.POST.copy()
+
             data['author'] = User.objects.get(id=request.user.id)
-            data['performer'] = User.objects.get(id=data['performer'])
-
             form = TaskForm(data, instance=task)
-
             if form.is_valid():
                 form.save()
+                labels = data.getlist('labels')
+                for label in labels:
+                    Labeled(task=task, label=Label.objects.get(name=label)).save()
                 messages.add_message(request, messages.SUCCESS, _("The task has been updated"))
                 return redirect('tasks')
             return render(request, 'tasks/update_task.html',
@@ -142,8 +148,9 @@ class TaskViewView(LoginRequiredMixin, TemplateView):
         task_id = kwargs.get('pk')
         try:
             task = Task.objects.get(id=task_id)
+            labels = task.labels.all()
         except Task.DoesNotExist:
             messages.add_message(request, messages.ERROR,
                                  _('Such task does not exist'))
         return render(request, 'tasks/view_task.html',
-                      NAVIGATION | {'task': task})
+                      NAVIGATION | {'task': task, 'labels': labels})
