@@ -3,7 +3,7 @@
 {% block content %}
   <div class="container wrapper flex-grow-1">
     <h1 class="my-4">{% translate labels %}</h1>
-    <a class="nav-link" href="/statuses/create/">{% translate 'Create label' %}</a>
+    <a class="nav-link" href="/labels/create/">{% translate 'Create label' %}</a>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -20,9 +20,9 @@
           <td>{{ label.name }}</td>
           <td>{{ label.created_at }}</td>
           <td>
-            <a href="{% url 'label_update' pk=status.id %}">{% translate row_edit %}</a>
+            <a href="{% url 'label_update' pk=label.id %}">{% translate row_edit %}</a>
             <br>
-            <a href="{% url 'label_delete' pk=status.id %}">{% translate row_delete %}</a>
+            <a href="{% url 'label_delete' pk=label.id %}">{% translate row_delete %}</a>
           </td>
         </tr>
         {% endfor %}

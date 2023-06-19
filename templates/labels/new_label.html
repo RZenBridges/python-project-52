@@ -1,0 +1,21 @@
+{% extends '../layout.html' %}
+{% load bootstrap4 i18n %}
+{% block content %}
+  <div class="container wrapper flex-grow-1">
+    <h1 class="my-4">{% translate 'Create label' %}</h1>
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="form-group">
+        {% translate form.name.label %}
+        {{ form.name }}
+        {% for error in form.name.errors %}
+            <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="{% translate 'Create' %}">
+      </div>
+    </form>
+  </div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends '../layout.html' %}
+{% load bootstrap4 i18n %}
+{% block content %}
+  <div class="container wrapper flex-grow-1">
+    <h1 class="my-4">{% translate 'Update label' %}</h1>
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="form-group">
+        {% translate form.name.label %}
+        {{ form.name }}
+      </div>
+      <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="{% translate 'Update' %}">
+      </div>
+    </form>
+  </div>
+{% endblock content %}
