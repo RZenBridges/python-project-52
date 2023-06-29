@@ -7,6 +7,7 @@ from .forms import TaskForm
 from task_manager.user.models import User
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .service import TaskFilter
 
 
 NAVIGATION = {
@@ -35,9 +36,11 @@ class TaskView(LoginRequiredMixin, TemplateView):
             'row_delete': _('Delete'),
         }
         tasks = Task.objects.all().order_by('id')
+        f = TaskFilter(request.GET, queryset=Task.objects.all().order_by('id'),
+                       current_user=request.user)
         return render(request,
                       'tasks/tasks.html',
-                      context={'task_list': tasks} | NAVIGATION | table)
+                      context={'task_list': tasks} | NAVIGATION | table | {'filter': f})
 
 
 # CREATE TASK page

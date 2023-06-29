@@ -12,46 +12,37 @@
       <div class="form-group">
         <label for="id_status">Статус</label>
         <div class="ml-2 mr-3">
-          <select name="status" class="form-control" title="" id="id_status">
-            <option value="" selected>---------</option>
-            <option value="1">option</option>
-          </select>
+          {{ filter.form.status }}
         </div>
       </div>
 
       <div class="form-group">
         <label for="id_executor">Исполнитель</label>
         <div class="mr-3 ml-2">
-          <select name="executor" class="form-control" title="" id="id_executor">
-            <option value="" selected>---------</option>
-            <option value="1">option1</option>
-          </select>
+            {{ filter.form.performer }}
         </div>
       </div>
 
       <div class="form-group">
         <label for="id_label">Метка</label>
         <div class="mr-3 ml-2">
-          <select name="label" class="form-control" title="" id="id_label">
-            <option value="" selected>---------</option>
-            <option value="1">option2</option>
-          </select>
+             {{ filter.form.labels }}
         </div>
       </div>
 
       <div class="form-group">
         <div class="mr-3">
-          <div class="form-check">
-            <input type="checkbox" name="self_tasks" class="form-check-input" id="id_self_tasks">
-            <label class="form-check-label" for="id_self_tasks">Только свои задачи</label>
-          </div>
+<!--          <div class="form-check">-->
+          {{ filter.form.author.label_tag }}
+          {{ filter.form.author }}
+<!--            <input type="checkbox" name="self_tasks" class="form-check-input" id="id_self_tasks">-->
+<!--            <label class="form-check-label" for="id_self_tasks">Только свои задачи</label>-->
+<!--          </div>-->
         </div>
       </div>
       <div class="form-group">
         <input class="btn btn-primary" type="submit" value="Показать">
       </div>
-    </form>
-
   </div>
 </div>
 
@@ -68,7 +59,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for task in task_list %}
+        {% for task in filter.qs %}
         <tr>
           <td>{{ task.id }}</td>
           <td><a href="{% url 'task_view' pk=task.id %}">{{ task.name }}</a></td>
