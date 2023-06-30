@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import UpdateView
 from .models import Task, Labeled
 from task_manager.label.models import Label
 from .forms import TaskForm
@@ -35,12 +36,12 @@ class TaskView(LoginRequiredMixin, TemplateView):
             'row_edit': _('Edit'),
             'row_delete': _('Delete'),
         }
-        tasks = Task.objects.all().order_by('id')
+        # tasks = Task.objects.all().order_by('id')
         f = TaskFilter(request.GET, queryset=Task.objects.all().order_by('id'),
                        current_user=request.user)
         return render(request,
                       'tasks/tasks.html',
-                      context={'task_list': tasks} | NAVIGATION | table | {'filter': f})
+                      context=NAVIGATION | table | {'filter': f})
 
 
 # CREATE TASK page
@@ -66,13 +67,17 @@ class TaskCreateFormView(LoginRequiredMixin, TemplateView):
 
 
 # UPDATE TASK page
-class TaskUpdateView(LoginRequiredMixin, TemplateView):
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
 
     def get(self, request, *args, **kwargs):
         task_id = kwargs.get('pk')
         try:
             task = Task.objects.get(id=task_id)
-            form = TaskForm(instance=task)
+            form = TaskForm(instance=task, initial={
+                'status': task.status,
+                'performer': task.performer,
+                'labels': task.labels.all(),
+            })
             return render(request,
                           'tasks/update_task.html',
                           NAVIGATION | {'form': form, 'task_id': task_id})
