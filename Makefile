@@ -24,3 +24,6 @@ lint:
 
 install:
 	poetry install
+
+test-coverage:
+	poetry run coverage report

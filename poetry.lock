@@ -267,16 +267,6 @@ files = [
 Django = ">=3.2"
 
 [[package]]
-name = "django-pytest"
-version = "0.2.0"
-description = "django test runner to use py.test tests"
-optional = false
-python-versions = "*"
-files = [
-    {file = "django-pytest-0.2.0.tar.gz", hash = "sha256:de21f20f9e7eb941529d75078b18192506a9f6d4ae80f86fbe2f3bcac8e09d71"},
-]
-
-[[package]]
 name = "flake8"
 version = "6.0.0"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -573,4 +563,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "737fd468fbbc7f6b7f4f742fdcb1b8b3a90fb86b807d6dc4f1f6e54c1066ddab"
+content-hash = "5d4dda521fa4e630e1babfba3a6a1da93a7bdc76d9cf4381ca1fadf3fb479d13"

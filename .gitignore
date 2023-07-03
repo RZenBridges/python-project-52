@@ -8,3 +8,4 @@ task_manager/status/migrations
 task_manager/task/migrations
 task_manager/label/migrations
 .idea
+.coverage
