@@ -15,7 +15,7 @@ NAVIGATION = {
     'title': _('Task Manager'),
     'users': _('Users'),
     'statuses': _('Statuses'),
-    'tags': _('Tags'),
+    'labels': _('Labels'),
     'tasks': _('Tasks'),
     'log_in': _('Log in'),
     'log_out': _('Log out'),
@@ -28,15 +28,15 @@ class TaskView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         table = {
-            'column_name': _('Task Name'),
-            'column_status': _('Status Name'),
-            'column_creator': _('Creator'),
+            'column_name': _('Task name'),
+            'column_status': _('Status name'),
+            'column_author': _('Author'),
             'column_performer': _('Performer'),
             'column_created': _('Created at'),
             'row_edit': _('Edit'),
             'row_delete': _('Delete'),
         }
-        # tasks = Task.objects.all().order_by('id')
+
         f = TaskFilter(request.GET, queryset=Task.objects.all().order_by('id'),
                        current_user=request.user)
         return render(request,
@@ -161,4 +161,9 @@ class TaskViewView(LoginRequiredMixin, TemplateView):
             messages.add_message(request, messages.ERROR,
                                  _('Such task does not exist'))
         return render(request, 'tasks/view_task.html',
-                      NAVIGATION | {'task': task, 'labels': labels})
+                      NAVIGATION | {'task': task,
+                                    'task_labels': labels,
+                                    'author': _('Author'),
+                                    'performer': _('Performer'),
+                                    'task_status': _('Status'),
+                                    })

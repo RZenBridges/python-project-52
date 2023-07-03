@@ -10,38 +10,34 @@
   <div class="card-body bg-light">
     <form class="form-inline center" method="get">
       <div class="form-group">
-        <label for="id_status">Статус</label>
+        {% translate filter.form.status.label %}
         <div class="ml-2 mr-3">
           {{ filter.form.status }}
         </div>
       </div>
 
       <div class="form-group">
-        <label for="id_executor">Исполнитель</label>
+        {% translate filter.form.performer.label %}
         <div class="mr-3 ml-2">
             {{ filter.form.performer }}
         </div>
       </div>
 
       <div class="form-group">
-        <label for="id_label">Метка</label>
+        {% translate filter.form.labels.label %}
         <div class="mr-3 ml-2">
              {{ filter.form.labels }}
         </div>
       </div>
 
       <div class="form-group">
-        <div class="mr-3">
-<!--          <div class="form-check">-->
-          {{ filter.form.author.label_tag }}
+          {{ filter.form.author.label }}
+        <div class="mr-3 ml-2">
           {{ filter.form.author }}
-<!--            <input type="checkbox" name="self_tasks" class="form-check-input" id="id_self_tasks">-->
-<!--            <label class="form-check-label" for="id_self_tasks">Только свои задачи</label>-->
-<!--          </div>-->
         </div>
       </div>
       <div class="form-group">
-        <input class="btn btn-primary" type="submit" value="Показать">
+        <input class="btn btn-primary text-right" type="submit" value="{% translate 'Show' %}">
       </div>
   </div>
 </div>
@@ -52,7 +48,7 @@
           <th>ID</th>
           <th>{% translate column_name %}</th>
           <th>{% translate column_status %}</th>
-          <th>{% translate column_creator %}</th>
+          <th>{% translate column_author %}</th>
           <th>{% translate column_performer %}</th>
           <th>{% translate column_created %}</th>
           <th></th>

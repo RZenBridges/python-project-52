@@ -10,10 +10,12 @@ class StatusForm(forms.ModelForm):
         fields = ('name', )
         widgets = {
             'name': forms.TextInput(attrs={
-                'label': _('Status Name'),
                 'class': 'form-control',
                 'placeholder': _('Status Name')
             })
+        }
+        labels = {
+            'name': _('Status Name')
         }
 
     def clean_name(self):

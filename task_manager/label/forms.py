@@ -10,8 +10,10 @@ class LabelForm(forms.ModelForm):
         fields = ('name', )
         widgets = {
             'name': forms.TextInput(attrs={
-                'label': _('Label Name'),
                 'class': 'form-control',
-                'placeholder': _('Label Name')
+                'placeholder': _('Label Name'),
             })
+        }
+        labels = {
+            'name': _('Label Name'),
         }

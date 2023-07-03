@@ -4,16 +4,25 @@ from .models import User
 from django.utils.translation import gettext_lazy as _
 
 
+FIRST_NAME = _('First Name')
+LAST_NAME = _('Last Name')
+USERNAME = _('Username')
+PASSWORD = _('Password')
+
+
 class UserForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
 
     password_confirmation = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                'label': _('Password Confirmation'),
                 'class': 'form-control',
                 'placeholder': _('Password (again)')
-            }
-        )
+            }),
+        label=_('Password Confirmation')
     )
 
     class Meta:
@@ -21,25 +30,28 @@ class UserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'username', 'password')
         widgets = {
             'first_name': forms.TextInput(attrs={
-                'label': _('First Name'),
+                'name': FIRST_NAME,
                 'class': 'form-control',
-                'placeholder': _('Name')
+                'placeholder': FIRST_NAME,
             }),
             'last_name': forms.TextInput(attrs={
-                'label': _('Last Name'),
                 'class': 'form-control',
-                'placeholder': _('Last Name')
+                'placeholder': LAST_NAME,
             }),
             'username': forms.TextInput(attrs={
-                'label': _('Username'),
                 'class': 'form-control',
-                'placeholder': _('Username')
+                'placeholder': USERNAME,
             }),
             'password': forms.PasswordInput(attrs={
-                'label': _('Password'),
                 'class': 'form-control',
-                'placeholder': _('Password')
+                'placeholder': PASSWORD
             })
+        }
+        labels = {
+            'first_name': FIRST_NAME,
+            'last_name': LAST_NAME,
+            'username': USERNAME,
+            'password': PASSWORD
         }
 
     def clean_password(self):

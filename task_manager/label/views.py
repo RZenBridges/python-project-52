@@ -11,11 +11,10 @@ NAVIGATION = {
     'users': _('Users'),
     'statuses': _('Statuses'),
     'labels': _('Labels'),
-    'tags': _('Tags'),
     'tasks': _('Tasks'),
     'log_in': _('Log in'),
     'log_out': _('Log out'),
-    'registration': _('Sign up')
+    'registration': _('Sign up'),
 }
 
 
@@ -23,7 +22,7 @@ class LabelView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         table = {
-            'column_name': _('Status Name'),
+            'column_name': _('Status name'),
             'column_created': _('Created at'),
             'row_edit': _('Edit'),
             'row_delete': _('Delete'),

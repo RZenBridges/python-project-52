@@ -12,7 +12,7 @@ NAVIGATION = {
     'title': _('Task Manager'),
     'users': _('Users'),
     'statuses': _('Statuses'),
-    'tags': _('Tags'),
+    'labels': _('Labels'),
     'tasks': _('Tasks'),
     'log_in': _('Log in'),
     'log_out': _('Log out'),

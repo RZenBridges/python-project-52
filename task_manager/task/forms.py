@@ -8,27 +8,28 @@ from django.utils.translation import gettext_lazy as _
 
 class TaskForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
+
     status = forms.ModelChoiceField(
-        label='status',
+        label=_('Status'),
         queryset=Status.objects.all(),
         widget=forms.Select(attrs={'class': 'regDropDown form-control'}),
         empty_label='----',
-        to_field_name='name',
     )
 
     performer = forms.ModelChoiceField(
-        label='performer',
+        label=_('Performer'),
         queryset=User.objects.all(),
         widget=forms.Select(attrs={'class': 'regDropDown form-control'}),
-        empty_label='----',
-        to_field_name='first_name'
+        empty_label='----'
     )
 
     labels = forms.ModelMultipleChoiceField(
-        label='labels',
+        label=_('Labels'),
         queryset=Label.objects.all(),
         widget=forms.SelectMultiple(attrs={'class': 'regDropDown form-control'}),
-        to_field_name='name',
         required=False
     )
 
@@ -37,13 +38,15 @@ class TaskForm(forms.ModelForm):
         fields = ('name', 'body', 'status', 'performer', 'author')
         widgets = {
             'name': forms.TextInput(attrs={
-                'label': _('name'),
                 'class': 'form-control',
-                'placeholder': _('name')
+                'placeholder': _('Task Name')
             }),
             'body': forms.Textarea(attrs={
-                'label': _('body'),
                 'class': 'form-control',
-                'placeholder': _('body'),
+                'placeholder': _('Task Body'),
             })
+        }
+        labels = {
+            'name': _('Task Name'),
+            'body': _('Task Body'),
         }

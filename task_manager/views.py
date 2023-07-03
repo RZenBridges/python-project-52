@@ -12,7 +12,6 @@ NAVIGATION = {
     'users': _('Users'),
     'statuses': _('Statuses'),
     'labels': _('Labels'),
-    'tags': _('Tags'),
     'tasks': _('Tasks'),
     'log_in': _('Log in'),
     'log_out': _('Log out'),

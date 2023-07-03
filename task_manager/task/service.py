@@ -4,6 +4,7 @@ from django import forms
 from task_manager.status.models import Status
 from task_manager.user.models import User
 from task_manager.label.models import Label
+from django.utils.translation import gettext_lazy as _
 
 
 class TaskFilter(django_filters.FilterSet):
@@ -18,8 +19,8 @@ class TaskFilter(django_filters.FilterSet):
                                                   attrs={'class': 'form-control'}))
     performer = django_filters.ModelChoiceFilter(method='performer_filter',
                                                  queryset=User.objects.all(),
-                                              widget=forms.Select(
-                                                  attrs={'class': 'form-control'}))
+                                                 widget=forms.Select(
+                                                     attrs={'class': 'form-control'}))
     labels = django_filters.ModelChoiceFilter(method='labels_filter',
                                               queryset=Label.objects.all(),
                                               widget=forms.Select(
@@ -27,7 +28,7 @@ class TaskFilter(django_filters.FilterSet):
     author = django_filters.BooleanFilter(method='author_filter',
                                           widget=forms.CheckboxInput(
                                               attrs={'class': 'form-check'}),
-                                          label='My tasks only')
+                                          label=_('My tasks only'))
 
     def status_filter(self, queryset, name, value):
         return queryset.filter(**{name: value})
@@ -46,4 +47,3 @@ class TaskFilter(django_filters.FilterSet):
     class Meta:
         model = Task
         fields = ['status', 'performer', 'labels']
-

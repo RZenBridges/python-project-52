@@ -7,7 +7,7 @@
       {% csrf_token %}
 
       <div class="form-group">
-        {% translate form.name.label %}
+        {% translate form.name.label_tag %}
         {{ form.name }}
       </div>
         {% for error in form.name.errors %}
@@ -16,7 +16,7 @@
 
 
       <div class="form-group">
-        {% translate form.body.label %}
+        {% translate form.body.label_tag %}
         {{ form.body }}
       </div>
         {% for error in form.body.errors %}
@@ -24,7 +24,7 @@
         {% endfor %}
 
       <div class="form-group">
-        {% translate form.status.label %}
+        {% translate form.status.label_tag %}
         {{ form.status }}
       </div>
         {% for error in form.status.errors %}
@@ -32,7 +32,7 @@
         {% endfor %}
 
       <div class="form-group">
-        {% translate form.performer.label %}
+        {% translate form.performer.label_tag %}
         {{ form.performer }}
       </div>
         {% for error in form.performer.errors %}
@@ -40,7 +40,7 @@
         {% endfor %}
 
       <div class="form-group">
-        {% translate form.labels.label %}
+        {% translate form.labels.label_tag %}
         {{ form.labels }}
       </div>
         {% for error in form.labels.errors %}
