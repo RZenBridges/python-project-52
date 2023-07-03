@@ -18,7 +18,7 @@ jobs:
           pip install poetry
           make install
       - name: Run Migrations
-        run: make migrate_db
+        run: poetry run python3 manage.py migrate
       - run: make lint
       - run: make test
       - name: Test and publish code coverage
