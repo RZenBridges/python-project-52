@@ -26,4 +26,4 @@ install:
 	poetry install
 
 test-coverage:
-	poetry run coverage report
+	poetry run coverage xml
