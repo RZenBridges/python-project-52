@@ -45,6 +45,7 @@ class LabelCreateFormView(LoginRequiredMixin, TemplateView):
         form = LabelForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, _("The label has been created"))
             return redirect('labels')
         return render(request,
                       'labels/new_label.html',

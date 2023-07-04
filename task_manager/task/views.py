@@ -62,6 +62,7 @@ class TaskCreateFormView(LoginRequiredMixin, TemplateView):
             for label in labels:
                 Labeled(task=Task.objects.get(name=data['name']),
                         label=Label.objects.get(name=label)).save()
+            messages.add_message(request, messages.SUCCESS, _('The task has been created'))
             return redirect('tasks')
         return render(request, 'tasks/new_task.html', {'form': form} | NAVIGATION)
 
@@ -81,7 +82,6 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
             return render(request,
                           'tasks/update_task.html',
                           NAVIGATION | {'form': form, 'task_id': task_id})
-
         except Task.DoesNotExist:
             messages.add_message(request, messages.ERROR,
                                  _('Such task does not exist'))
@@ -105,7 +105,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
                 labels = data.getlist('labels')
                 for label in labels:
                     Labeled(task=task, label=Label.objects.get(name=label)).save()
-                messages.add_message(request, messages.SUCCESS, _("The task has been updated"))
+                messages.add_message(request, messages.SUCCESS, _('The task has been updated'))
                 return redirect('tasks')
             return render(request, 'tasks/update_task.html',
                           NAVIGATION | {'form': form, 'task_id': task_id})

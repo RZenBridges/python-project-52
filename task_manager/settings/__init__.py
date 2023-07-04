@@ -1,10 +1,10 @@
 from .base import *
-import os
 
-if os.getenv('ACTION_MODE'):
-    try:
-        from .development import *
-    except ImportError:
-        from .production import *
-else:
+try:
+    from .development import *
+    live = False
+except ImportError:
+    live = True
+
+if live:
     from .production import *

@@ -16,7 +16,7 @@ class UserTest(TestCase):
             'password_confirmation': self.password
         }
 
-    def test_users_read(self):
+    def test_user_read(self):
         response = self.client.get('/users/')
         self.assertEqual(response.status_code, 200)
 
