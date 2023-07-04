@@ -45,6 +45,7 @@ class StatusCreateFormView(LoginRequiredMixin, TemplateView):
         form = StatusForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, _("The status has been created"))
             return redirect('statuses')
         return render(request, 'statuses/new_status.html', {'form': form} | NAVIGATION)
 

@@ -47,7 +47,9 @@ class UsersCreateFormView(TemplateView):
     def post(self, request, *args, **kwargs):
         form = UserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
             messages.add_message(request, messages.SUCCESS, _('The user has been registered'))
             return redirect('login')
         return render(request, 'users/new_user.html', NAVIGATION | {'form': form})

@@ -6,21 +6,28 @@ class UserTest(TestCase):
 
     def setUp(self):
         self.users = get_user_model().objects.all()
+        self.username = 'testuser'
+        self.password = '12345'
         self.form_data = {
             'first_name': 'Jules',
             'last_name': 'Verne',
-            'username': 'nemo',
-            'password': '12345',
-            'password_confirmation': '12345'
+            'username': self.username,
+            'password': self.password,
+            'password_confirmation': self.password
         }
 
     def test_users_read(self):
         response = self.client.get('/users/')
         self.assertEqual(response.status_code, 200)
 
-    def test_user_create_update_delete(self):
-        self.assertEqual(self.users.count(), 0)
-        # REGISTER
+    def test_create_user_db(self):
+        self.user = get_user_model().objects.create_user(username=self.username,
+                                                         password=self.password)
+        login = self.client.login(username=self.username,
+                                  password=self.password)
+        self.assertTrue(login)
+
+    def test_create_user_form(self):
         response_register_user = self.client.post('/users/create/',
                                                   follow=True,
                                                   data=self.form_data)
@@ -29,16 +36,20 @@ class UserTest(TestCase):
                             status_code=200)
 
         self.assertEqual(self.users.count(), 1)
-        # LOG IN
-        self.client.post('/login/', follow=True, data={'username': self.form_data['username'],
-                                                       'password': self.form_data['password']})
-        # UPDATE
+
+    def test_user_update_form(self):
+        self.user = get_user_model().objects.create_user(username=self.username,
+                                                         password=self.password)
+        self.client.login(username=self.username, password=self.password)
         response_update_user = self.client.post('/users/1/update/',
                                                 follow=True,
                                                 data=self.form_data)
-
         self.assertContains(response_update_user, 'The user has been updated', status_code=200)
-        # DELETE
+
+    def test_user_delete_form(self):
+        self.user = get_user_model().objects.create_user(username=self.username,
+                                                         password=self.password)
+        self.client.login(username=self.username, password=self.password)
         response_delete_user = self.client.post('/users/1/delete/',
                                                 follow=True,
                                                 data=self.form_data)

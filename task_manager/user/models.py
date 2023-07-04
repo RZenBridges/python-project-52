@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.hashers import make_password
 
 
 class User(AbstractUser):
@@ -14,5 +13,5 @@ class User(AbstractUser):
         return f'{self.first_name} {self.last_name}'
 
     def save(self, *args, **kwargs):
-        self.password = make_password(self.password)
+        # self.password = make_password(self.password)
         super(User, self).save(*args, **kwargs)
