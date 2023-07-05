@@ -8,13 +8,25 @@ on:
       - '**'
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     services:
-      db:
-        condition: service_healthy
+      postgres:
+        image: postgres:latest
+        env:
+          PGNAME: ${{ secrets.PGNAME }}
+          PGUSER: ${{ secrets.PGUSER }}
+          PGPASSWORD: ${{ secrets.PGPASSWORD }}
+        port:
+          - 5432: 5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Install Dependencies
         run: |
