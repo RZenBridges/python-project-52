@@ -10,6 +10,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      db:
+        condition: service_healthy
     steps:
       - uses: actions/checkout@v3
 
