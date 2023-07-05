@@ -12,14 +12,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-from django.contrib.messages import constants as message_constants
 
+import dj_database_url
+from django.contrib.messages import constants as message_constants
 from dotenv import load_dotenv
 
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -94,7 +95,15 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {}
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv('POSTGRES') if os.getenv('POSTGRES')
+        else f'sqlite:///{str(BASE_DIR / "db.sqlite3")}',
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+}
+
 
 
 # Password validation
