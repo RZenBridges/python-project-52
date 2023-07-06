@@ -2,7 +2,7 @@
 {% load bootstrap4 i18n %}
 {% block content %}
   <div class="container wrapper flex-grow-1">
-    <h1 class="my-4">{% translate log_in %}</h1>
+    <h1 class="my-4">{% translate 'Sign in' %}</h1>
     <form method="post">
       {% csrf_token %}
 
@@ -15,7 +15,7 @@
         {{ form.password }}
       </div>
 
-      <input class="btn btn-primary" type="submit" value="{% translate 'Log in' %}" role="button">
+      <input role="button" class="btn btn-primary" type="submit" value="{% translate 'Log in' %}" >
 
     </form>
   </div>
