@@ -21,7 +21,7 @@ msgstr ""
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: task_manager/forms.py:12 task_manager/forms.py:14
-#: task_manager/user/forms.py:9
+#: task_manager/user/forms.py:9 task_manager/user/views.py:28
 msgid "Username"
 msgstr "Имя пользователя"
 
@@ -207,10 +207,6 @@ msgstr "Пароль (еще раз)"
 #: task_manager/user/forms.py:25
 msgid "Password Confirmation"
 msgstr "Подтверждение пароля"
-
-#: task_manager/user/views.py:28
-msgid "User name"
-msgstr "Псевдоним"
 
 #: task_manager/user/views.py:29
 msgid "Full name"
