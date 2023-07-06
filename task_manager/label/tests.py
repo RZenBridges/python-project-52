@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from .models import Label
+from django.utils.translation import gettext as _
 
 
 class LabelTest(TestCase):
@@ -26,7 +27,7 @@ class LabelTest(TestCase):
                                                  follow=True,
                                                  data={'name': self.label})
         self.assertContains(response_create_label,
-                            'The label has been created',
+                            _('The label has been created'),
                             status_code=200)
         self.assertEqual(self.labels.count(), 1)
 
@@ -36,7 +37,7 @@ class LabelTest(TestCase):
                                                  follow=True,
                                                  data={'name': self.label})
         self.assertContains(response_update_label,
-                            'The label has been updated',
+                            _('The label has been updated'),
                             status_code=200)
 
     def test_label_delete_form(self):
@@ -44,5 +45,5 @@ class LabelTest(TestCase):
         response_delete_label = self.client.post('/labels/1/delete/',
                                                  follow=True)
         self.assertContains(response_delete_label,
-                            'The label has been deleted',
+                            _('The label has been deleted'),
                             status_code=200)

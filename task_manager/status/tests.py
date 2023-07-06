@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from .models import Status
+from django.utils.translation import gettext as _
 
 
 class StatusTest(TestCase):
@@ -26,7 +27,7 @@ class StatusTest(TestCase):
                                                   follow=True,
                                                   data={'name': self.status})
         self.assertContains(response_create_status,
-                            'The status has been created',
+                            _('The status has been created'),
                             status_code=200)
         self.assertEqual(self.statuses.count(), 1)
 
@@ -36,7 +37,7 @@ class StatusTest(TestCase):
                                                   follow=True,
                                                   data={'name': self.status})
         self.assertContains(response_update_status,
-                            'The status has been updated',
+                            _('The status has been updated'),
                             status_code=200)
 
     def test_status_delete_form(self):
@@ -44,5 +45,5 @@ class StatusTest(TestCase):
         response_delete_status = self.client.post('/statuses/1/delete/',
                                                   follow=True)
         self.assertContains(response_delete_status,
-                            'The status has been deleted',
+                            _('The status has been deleted'),
                             status_code=200)

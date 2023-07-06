@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from task_manager.status.models import Status
 from task_manager.label.models import Label
 from .models import Task
+from django.utils.translation import gettext as _
 
 
 class TaskTest(TestCase):
@@ -41,7 +42,7 @@ class TaskTest(TestCase):
                                                     'performer': 1,
                                                 })
         self.assertContains(response_create_task,
-                            'The task has been created',
+                            _('The task has been created'),
                             status_code=200)
         self.assertEqual(self.tasks.count(), 1)
 
@@ -58,7 +59,7 @@ class TaskTest(TestCase):
                                                     'performer': 1,
                                                 })
         self.assertContains(response_update_task,
-                            'The task has been updated',
+                            _('The task has been updated'),
                             status_code=200)
 
     def test_task_delete_form(self):
@@ -67,5 +68,5 @@ class TaskTest(TestCase):
         response_delete_task = self.client.post('/tasks/1/delete/',
                                                 follow=True)
         self.assertContains(response_delete_task,
-                            'The task has been deleted',
+                            _('The task has been deleted'),
                             status_code=200)

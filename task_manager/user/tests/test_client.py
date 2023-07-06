@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext as _
 
 
 class UserTest(TestCase):
@@ -32,7 +33,7 @@ class UserTest(TestCase):
                                                   follow=True,
                                                   data=self.form_data)
         self.assertContains(response_register_user,
-                            'The user has been registered',
+                            _('The user has been registered'),
                             status_code=200)
 
         self.assertEqual(self.users.count(), 1)
@@ -44,7 +45,7 @@ class UserTest(TestCase):
         response_update_user = self.client.post('/users/1/update/',
                                                 follow=True,
                                                 data=self.form_data)
-        self.assertContains(response_update_user, 'The user has been updated', status_code=200)
+        self.assertContains(response_update_user, _('The user has been updated'), status_code=200)
 
     def test_user_delete_form(self):
         self.user = get_user_model().objects.create_user(username=self.username,
@@ -54,5 +55,5 @@ class UserTest(TestCase):
                                                 follow=True,
                                                 data=self.form_data)
 
-        self.assertContains(response_delete_user, 'The user has been deleted', status_code=200)
+        self.assertContains(response_delete_user, _('The user has been deleted'), status_code=200)
         self.assertEqual(self.users.count(), 0)

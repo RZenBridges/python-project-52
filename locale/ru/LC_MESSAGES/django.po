@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 06:20+0000\n"
+"POT-Creation-Date: 2023-07-06 08:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: task_manager/forms.py:12 task_manager/forms.py:14
-#: task_manager/user/forms.py:9 task_manager/user/views.py:28
+#: task_manager/user/forms.py:9
 msgid "Username"
 msgstr "Имя пользователя"
 
@@ -33,6 +33,18 @@ msgstr "Пароль"
 #: task_manager/label/forms.py:14 task_manager/label/forms.py:18
 msgid "Label Name"
 msgstr "Имя"
+
+#: task_manager/label/tests.py:30 task_manager/label/views.py:48
+msgid "The label has been created"
+msgstr "Метка успешно создана"
+
+#: task_manager/label/tests.py:40 task_manager/label/views.py:75
+msgid "The label has been updated"
+msgstr "Метка успешно изменена"
+
+#: task_manager/label/tests.py:48 task_manager/label/views.py:99
+msgid "The label has been deleted"
+msgstr "Метка успешно удалена"
 
 #: task_manager/label/views.py:10 task_manager/status/views.py:11
 #: task_manager/task/views.py:15 task_manager/user/views.py:12
@@ -102,41 +114,29 @@ msgstr "Изменить"
 msgid "Delete"
 msgstr "Удалить"
 
-#: task_manager/label/views.py:48
-msgid "The label has been created"
-msgstr "Метка успешно создана"
-
 #: task_manager/label/views.py:66 task_manager/label/views.py:102
 msgid "Such label does not exist"
 msgstr "Такая метка не существует"
-
-#: task_manager/label/views.py:75
-msgid "The label has been updated"
-msgstr "Метка успешно изменена"
 
 #: task_manager/label/views.py:88 task_manager/status/views.py:64
 #: task_manager/status/views.py:86 task_manager/status/views.py:100
 msgid "Such status does not exist"
 msgstr "Такой статус не существует"
 
-#: task_manager/label/views.py:99
-msgid "The label has been deleted"
-msgstr "Метка успешно удалена"
-
 #: task_manager/status/forms.py:14 task_manager/status/forms.py:18
 #: task_manager/status/views.py:27
 msgid "Status Name"
 msgstr "Имя статуса"
 
-#: task_manager/status/views.py:48
+#: task_manager/status/tests.py:30 task_manager/status/views.py:48
 msgid "The status has been created"
 msgstr "Статус успешно создан"
 
-#: task_manager/status/views.py:73
+#: task_manager/status/tests.py:40 task_manager/status/views.py:73
 msgid "The status has been updated"
 msgstr "Статус успешно изменен"
 
-#: task_manager/status/views.py:97
+#: task_manager/status/tests.py:48 task_manager/status/views.py:97
 msgid "The status has been deleted"
 msgstr "Статус успешно удален"
 
@@ -161,6 +161,18 @@ msgstr "Описание задачи"
 msgid "My tasks only"
 msgstr "Мои задачи"
 
+#: task_manager/task/tests.py:45 task_manager/task/views.py:65
+msgid "The task has been created"
+msgstr "Задача успешно создана"
+
+#: task_manager/task/tests.py:62 task_manager/task/views.py:108
+msgid "The task has been updated"
+msgstr "Задача успешно изменена"
+
+#: task_manager/task/tests.py:71 task_manager/task/views.py:146
+msgid "The task has been deleted"
+msgstr "Задача успешно удалена"
+
 #: task_manager/task/views.py:31
 msgid "Task name"
 msgstr "Имя задачи"
@@ -168,10 +180,6 @@ msgstr "Имя задачи"
 #: task_manager/task/views.py:33 task_manager/task/views.py:166
 msgid "Author"
 msgstr "Автор"
-
-#: task_manager/task/views.py:65
-msgid "The task has been created"
-msgstr "Задача успешно создана"
 
 #: task_manager/task/views.py:87 task_manager/task/views.py:115
 #: task_manager/task/views.py:131 task_manager/task/views.py:149
@@ -183,14 +191,6 @@ msgstr "Такая задача не существует"
 #: task_manager/task/views.py:142
 msgid "You need to be the creator of the task to delete it"
 msgstr "Удалить задачу может только ее создатель"
-
-#: task_manager/task/views.py:108
-msgid "The task has been updated"
-msgstr "Задача успешно изменена"
-
-#: task_manager/task/views.py:146
-msgid "The task has been deleted"
-msgstr "Задача успешно удалена"
 
 #: task_manager/user/forms.py:7
 msgid "First Name"
@@ -208,13 +208,27 @@ msgstr "Пароль (еще раз)"
 msgid "Password Confirmation"
 msgstr "Подтверждение пароля"
 
+#: task_manager/user/tests/test_client.py:36 task_manager/user/views.py:53
+msgid "The user has been registered"
+msgstr "Пользователь успешно зарегистрирован"
+
+#: task_manager/user/tests/test_client.py:48 task_manager/user/views.py:87
+msgid "The user has been updated"
+msgstr "Пользователь успешно изменен"
+
+#: task_manager/user/tests/test_client.py:58 task_manager/user/views.py:123
+msgid "The user has been deleted"
+msgstr "Пользователь успешно удален"
+
+#: task_manager/user/views.py:28
+#, fuzzy
+#| msgid "Username"
+msgid "User name"
+msgstr "Имя пользователя"
+
 #: task_manager/user/views.py:29
 msgid "Full name"
 msgstr "Полное имя"
-
-#: task_manager/user/views.py:53
-msgid "The user has been registered"
-msgstr "Пользователь успешно зарегистрирован"
 
 #: task_manager/user/views.py:72 task_manager/user/views.py:109
 msgid "You are not authenticated! Please, log in."
@@ -223,14 +237,6 @@ msgstr "Вы не авторизованы! Пожалуйста, выполни
 #: task_manager/user/views.py:77 task_manager/user/views.py:113
 msgid "You are not authorized to change other users."
 msgstr "У вас нет прав для изменения другого пользователя."
-
-#: task_manager/user/views.py:87
-msgid "The user has been updated"
-msgstr "Пользователь успешно изменен"
-
-#: task_manager/user/views.py:123
-msgid "The user has been deleted"
-msgstr "Пользователь успешно удален"
 
 #: task_manager/user/views.py:126
 msgid "You are not authorized for this action"
