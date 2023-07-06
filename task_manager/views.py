@@ -13,7 +13,7 @@ NAVIGATION = {
     'statuses': _('Statuses'),
     'labels': _('Labels'),
     'tasks': _('Tasks'),
-    'log_in': _('Log in'),
+    'log_in': _('Sign in'),
     'log_out': _('Log out'),
     'registration': _('Sign up')
 }
