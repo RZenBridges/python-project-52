@@ -34,7 +34,6 @@ DEBUG = os.getenv('DEBUG', False)
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'webserver').split()
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -133,7 +132,7 @@ CSRF_TRUSTED_ORIGINS = [
 MESSAGE_TAGS = {message_constants.ERROR: "danger"}
 
 
-LANGUAGE_CODE = 'en-US'
+LANGUAGE_CODE = 'ru-RU'
 
 LANGUAGES = (
     ('ru-RU', 'Russian'),
