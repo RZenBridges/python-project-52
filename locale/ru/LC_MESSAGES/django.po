@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-02 12:42+0000\n"
+"POT-Creation-Date: 2023-07-06 06:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,20 +102,24 @@ msgstr "Изменить"
 msgid "Delete"
 msgstr "Удалить"
 
-#: task_manager/label/views.py:65 task_manager/label/views.py:101
+#: task_manager/label/views.py:48
+msgid "The label has been created"
+msgstr "Метка успешно создана"
+
+#: task_manager/label/views.py:66 task_manager/label/views.py:102
 msgid "Such label does not exist"
 msgstr "Такая метка не существует"
 
-#: task_manager/label/views.py:74
+#: task_manager/label/views.py:75
 msgid "The label has been updated"
 msgstr "Метка успешно изменена"
 
-#: task_manager/label/views.py:87 task_manager/status/views.py:63
-#: task_manager/status/views.py:85 task_manager/status/views.py:99
+#: task_manager/label/views.py:88 task_manager/status/views.py:64
+#: task_manager/status/views.py:86 task_manager/status/views.py:100
 msgid "Such status does not exist"
 msgstr "Такой статус не существует"
 
-#: task_manager/label/views.py:98
+#: task_manager/label/views.py:99
 msgid "The label has been deleted"
 msgstr "Метка успешно удалена"
 
@@ -124,11 +128,15 @@ msgstr "Метка успешно удалена"
 msgid "Status Name"
 msgstr "Имя статуса"
 
-#: task_manager/status/views.py:72
+#: task_manager/status/views.py:48
+msgid "The status has been created"
+msgstr "Статус успешно создан"
+
+#: task_manager/status/views.py:73
 msgid "The status has been updated"
 msgstr "Статус успешно изменен"
 
-#: task_manager/status/views.py:96
+#: task_manager/status/views.py:97
 msgid "The status has been deleted"
 msgstr "Статус успешно удален"
 
@@ -141,17 +149,13 @@ msgstr "Статус"
 msgid "Performer"
 msgstr "Исполнитель"
 
-#: task_manager/task/forms.py:42
-msgid "task name"
+#: task_manager/task/forms.py:42 task_manager/task/forms.py:50
+msgid "Task Name"
 msgstr "Имя задачи"
 
 #: task_manager/task/forms.py:46 task_manager/task/forms.py:51
 msgid "Task Body"
 msgstr "Описание задачи"
-
-#: task_manager/task/forms.py:50
-msgid "Task Name"
-msgstr "Имя задачи"
 
 #: task_manager/task/service.py:31
 msgid "My tasks only"
@@ -164,6 +168,10 @@ msgstr "Имя задачи"
 #: task_manager/task/views.py:33 task_manager/task/views.py:166
 msgid "Author"
 msgstr "Автор"
+
+#: task_manager/task/views.py:65
+msgid "The task has been created"
+msgstr "Задача успешно создана"
 
 #: task_manager/task/views.py:87 task_manager/task/views.py:115
 #: task_manager/task/views.py:131 task_manager/task/views.py:149
@@ -208,27 +216,27 @@ msgstr "Псевдоним"
 msgid "Full name"
 msgstr "Полное имя"
 
-#: task_manager/user/views.py:51
+#: task_manager/user/views.py:53
 msgid "The user has been registered"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/user/views.py:70 task_manager/user/views.py:107
+#: task_manager/user/views.py:72 task_manager/user/views.py:109
 msgid "You are not authenticated! Please, log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: task_manager/user/views.py:75 task_manager/user/views.py:111
+#: task_manager/user/views.py:77 task_manager/user/views.py:113
 msgid "You are not authorized to change other users."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/user/views.py:85
+#: task_manager/user/views.py:87
 msgid "The user has been updated"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/user/views.py:121
+#: task_manager/user/views.py:123
 msgid "The user has been deleted"
 msgstr "Пользователь успешно удален"
 
-#: task_manager/user/views.py:124
+#: task_manager/user/views.py:126
 msgid "You are not authorized for this action"
 msgstr "У вас нет прав для изменения другого пользователя."
 
@@ -369,6 +377,9 @@ msgstr "Для подтверждения введите, пожалуйста, 
 #: templates/users/new_user.html:53
 msgid "Register"
 msgstr "Зарегистрировать"
+
+#~ msgid "task name"
+#~ msgstr "Имя задачи"
 
 #, fuzzy
 #~| msgid "Username"

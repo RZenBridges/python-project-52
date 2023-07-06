@@ -135,11 +135,11 @@ CSRF_TRUSTED_ORIGINS = [
 MESSAGE_TAGS = {message_constants.ERROR: "danger"}
 
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-US'
 
 LANGUAGES = (
-    ('ru', 'Russian'),
-    ('en-us', 'English')
+    ('ru-RU', 'Russian'),
+    ('en-US', 'English')
 )
 
 LOCALE_PATHS = [
