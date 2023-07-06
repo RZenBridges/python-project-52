@@ -35,9 +35,12 @@ class UsersLoginView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         form = InactiveUserAuthenticationForm()
-        return render(request, 'login.html', NAVIGATION | {
-            'form': form
-        })
+        if request.user.is_anonymous:
+            return render(request, 'login.html', NAVIGATION | {
+                'form': form
+            })
+        else:
+            return redirect('home')
 
     def post(self, request, *args, **kwargs):
         try:
