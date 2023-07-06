@@ -25,7 +25,7 @@ class UsersView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         table = {
-            'column_name': _('User name'),
+            'column_name': _('Username'),
             'column_fname': _('Full name'),
             'column_created': _('Created at'),
             'row_edit': _('Edit'),
