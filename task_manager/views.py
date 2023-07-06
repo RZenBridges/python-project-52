@@ -40,10 +40,9 @@ class UsersLoginView(TemplateView):
             messages.add_message(
                 request,
                 messages.ERROR,
-                _("Enter correct username and password. Both fields can becase-sensitive"))
-            logging.WARNING(
-                _("Enter correct username and password. Both fields can becase-sensitive")
-            )
+                _('Enter correct username and password. Both fields can becase-sensitive'))
+            logging.warning(
+                'username and password are incorrect or such user is not registered')
         return redirect('login')
 
 
