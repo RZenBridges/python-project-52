@@ -23,7 +23,7 @@ msgstr ""
 #: task_manager/forms.py:12 task_manager/forms.py:14
 #: task_manager/user/forms.py:9
 msgid "Username"
-msgstr "Псевдоним"
+msgstr "Имя пользователя"
 
 #: task_manager/forms.py:21 task_manager/forms.py:23
 #: task_manager/user/forms.py:10
@@ -32,7 +32,7 @@ msgstr "Пароль"
 
 #: task_manager/label/forms.py:14 task_manager/label/forms.py:18
 msgid "Label Name"
-msgstr "Имя метки"
+msgstr "Имя"
 
 #: task_manager/label/views.py:10 task_manager/status/views.py:11
 #: task_manager/task/views.py:15 task_manager/user/views.py:12
@@ -85,7 +85,7 @@ msgstr "Регистрация"
 
 #: task_manager/label/views.py:25 task_manager/task/views.py:32
 msgid "Status name"
-msgstr "Имя статуса"
+msgstr "Имя"
 
 #: task_manager/label/views.py:26 task_manager/status/views.py:28
 #: task_manager/task/views.py:35 task_manager/user/views.py:30
@@ -151,7 +151,7 @@ msgstr "Исполнитель"
 
 #: task_manager/task/forms.py:42 task_manager/task/forms.py:50
 msgid "Task Name"
-msgstr "Имя задачи"
+msgstr "Имя"
 
 #: task_manager/task/forms.py:46 task_manager/task/forms.py:51
 msgid "Task Body"
@@ -380,11 +380,6 @@ msgstr "Зарегистрировать"
 
 #~ msgid "task name"
 #~ msgstr "Имя задачи"
-
-#, fuzzy
-#~| msgid "Username"
-#~ msgid "username"
-#~ msgstr "Псевдоним"
 
 #, fuzzy
 #~| msgid "Password"
