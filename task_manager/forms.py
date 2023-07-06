@@ -6,23 +6,28 @@ from django import forms
 
 
 class InactiveUserAuthenticationForm(AuthenticationForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
+
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'label': _('Username'),
                 'class': 'form-control',
                 'placeholder': _('Username'),
             }
-        )
+        ),
+        label=_('Username'),
     )
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                'label': _('Password'),
                 'class': 'form-control',
                 'placeholder': _('Password'),
             }
-        )
+        ),
+        label=_('Password')
     )
 
     class Meta:
