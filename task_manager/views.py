@@ -1,3 +1,5 @@
+import logging
+
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
@@ -39,6 +41,9 @@ class UsersLoginView(TemplateView):
                 request,
                 messages.ERROR,
                 _("Enter correct username and password. Both fields can becase-sensitive"))
+            logging.WARNING(
+                _("Enter correct username and password. Both fields can becase-sensitive")
+            )
         return redirect('login')
 
 
