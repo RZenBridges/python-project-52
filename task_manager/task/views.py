@@ -11,18 +11,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .service import TaskFilter
 
 
-NAVIGATION = {
-    'title': _('Task Manager'),
-    'users': _('Users'),
-    'statuses': _('Statuses'),
-    'labels': _('Labels'),
-    'tasks': _('Tasks'),
-    'log_in': _('Sign in'),
-    'log_out': _('Log out'),
-    'registration': _('Sign up')
-}
-
-
 # ALL TASKS page
 class TaskView(LoginRequiredMixin, TemplateView):
 
@@ -41,7 +29,7 @@ class TaskView(LoginRequiredMixin, TemplateView):
                        current_user=request.user)
         return render(request,
                       'tasks/tasks.html',
-                      context=NAVIGATION | table | {'filter': f})
+                      context=table | {'filter': f})
 
 
 # CREATE TASK page
@@ -49,7 +37,7 @@ class TaskCreateFormView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         form = TaskForm()
-        return render(request, 'tasks/new_task.html', {'form': form} | NAVIGATION)
+        return render(request, 'tasks/new_task.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
         data = request.POST.copy()
@@ -64,7 +52,7 @@ class TaskCreateFormView(LoginRequiredMixin, TemplateView):
                         label=Label.objects.get(name=label)).save()
             messages.add_message(request, messages.SUCCESS, _('The task has been created'))
             return redirect('tasks')
-        return render(request, 'tasks/new_task.html', {'form': form} | NAVIGATION)
+        return render(request, 'tasks/new_task.html', {'form': form})
 
 
 # UPDATE TASK page
@@ -81,7 +69,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
             })
             return render(request,
                           'tasks/update_task.html',
-                          NAVIGATION | {'form': form, 'task_id': task_id})
+                          {'form': form, 'task_id': task_id})
         except Task.DoesNotExist:
             messages.add_message(request, messages.ERROR,
                                  _('Such task does not exist'))
@@ -108,7 +96,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
                 messages.add_message(request, messages.SUCCESS, _('The task has been updated'))
                 return redirect('tasks')
             return render(request, 'tasks/update_task.html',
-                          NAVIGATION | {'form': form, 'task_id': task_id})
+                          {'form': form, 'task_id': task_id})
 
         except Task.DoesNotExist:
             messages.add_message(request, messages.ERROR,
@@ -131,7 +119,7 @@ class TaskDeleteView(LoginRequiredMixin, TemplateView):
             messages.add_message(request, messages.ERROR, _('Such task does not exist'))
             return redirect('tasks')
         return render(request, 'tasks/delete_task.html',
-                      NAVIGATION | {'task_id': task_id, 'task_name': task.name})
+                      {'task_id': task_id, 'task_name': task.name})
 
     def post(self, request, *args, **kwargs):
         task_id = kwargs.get('pk')
@@ -160,10 +148,7 @@ class TaskViewView(LoginRequiredMixin, TemplateView):
         except Task.DoesNotExist:
             messages.add_message(request, messages.ERROR,
                                  _('Such task does not exist'))
-        return render(request, 'tasks/view_task.html',
-                      NAVIGATION | {'task': task,
-                                    'task_labels': labels,
-                                    'author': _('Author'),
-                                    'performer': _('Performer'),
-                                    'task_status': _('Status'),
-                                    })
+        return render(request,
+                      'tasks/view_task.html',
+                      {'task': task, 'task_labels': labels, 'author': _('Author'),
+                       'performer': _('Performer'), 'task_status': _('Status')})

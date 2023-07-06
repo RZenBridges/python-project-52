@@ -7,18 +7,6 @@ from django.contrib.auth import login, logout
 from .user.models import User
 
 
-NAVIGATION = {
-    'title': _('Task Manager'),
-    'users': _('Users'),
-    'statuses': _('Statuses'),
-    'labels': _('Labels'),
-    'tasks': _('Tasks'),
-    'log_in': _('Sign in'),
-    'log_out': _('Log out'),
-    'registration': _('Sign up')
-}
-
-
 class IndexView(TemplateView):
 
     def get(self, request, *args, **kwargs):
@@ -28,7 +16,7 @@ class IndexView(TemplateView):
             'author': _('Learn more about the author')
         }
 
-        return render(request, 'index.html', context=index | NAVIGATION)
+        return render(request, 'index.html', context=index)
 
 
 class UsersLoginView(TemplateView):
@@ -36,11 +24,8 @@ class UsersLoginView(TemplateView):
     def get(self, request, *args, **kwargs):
         form = InactiveUserAuthenticationForm()
         if request.user.is_anonymous:
-            return render(request, 'login.html', NAVIGATION | {
-                'form': form
-            })
-        else:
-            return redirect('home')
+            return render(request, 'login.html', {'form': form})
+        return redirect('home')
 
     def post(self, request, *args, **kwargs):
         try:

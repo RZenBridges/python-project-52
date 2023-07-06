@@ -8,17 +8,6 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-NAVIGATION = {
-    'title': _('Task Manager'),
-    'users': _('Users'),
-    'statuses': _('Statuses'),
-    'labels': _('Labels'),
-    'tasks': _('Tasks'),
-    'log_in': _('Sign in'),
-    'log_out': _('Log out'),
-    'registration': _('Sign up')
-}
-
 
 # ALL USERS page
 class UsersView(TemplateView):
@@ -34,7 +23,7 @@ class UsersView(TemplateView):
         users = User.objects.all().order_by('id')
         return render(request,
                       'users/users.html',
-                      context={'user_list': users} | NAVIGATION | table)
+                      context={'user_list': users} | table)
 
 
 # CREATE USER page
@@ -42,7 +31,7 @@ class UsersCreateFormView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         form = UserForm()
-        return render(request, 'users/new_user.html', NAVIGATION | {'form': form})
+        return render(request, 'users/new_user.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = UserForm(request.POST)
@@ -52,7 +41,7 @@ class UsersCreateFormView(TemplateView):
             user.save()
             messages.add_message(request, messages.SUCCESS, _('The user has been registered'))
             return redirect('login')
-        return render(request, 'users/new_user.html', NAVIGATION | {'form': form})
+        return render(request, 'users/new_user.html', {'form': form})
 
 
 # UPDATE USER page
@@ -65,7 +54,7 @@ class UsersUpdateView(TemplateView):
             form = UserForm(instance=user)
             return render(request,
                           'users/update_user.html',
-                          NAVIGATION | {'form': form, 'user_id': user_id})
+                          {'form': form, 'user_id': user_id})
 
         elif request.user.is_anonymous:
             messages.add_message(request, messages.ERROR,
@@ -87,8 +76,7 @@ class UsersUpdateView(TemplateView):
             messages.add_message(request, messages.SUCCESS, _("The user has been updated"))
             login(request, user)
             return redirect('users')
-        return render(request, 'users/update_user.html',
-                      NAVIGATION | {'form': form, 'user_id': user_id})
+        return render(request, 'users/update_user.html', {'form': form, 'user_id': user_id})
 
 
 # DELETE USER page
@@ -99,7 +87,7 @@ class UsersDeleteView(TemplateView):
         user_id = kwargs.get('pk')
         if request.user.id == user_id:
             user = User.objects.get(id=user_id)
-            return render(request, 'users/delete_user.html', NAVIGATION | {
+            return render(request, 'users/delete_user.html', {
                 'user_id': user_id,
                 'fullname': f'{user.first_name} {user.last_name}'
             })

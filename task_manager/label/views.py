@@ -6,17 +6,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import LabelForm
 from .models import Label
 
-NAVIGATION = {
-    'title': _('Task Manager'),
-    'users': _('Users'),
-    'statuses': _('Statuses'),
-    'labels': _('Labels'),
-    'tasks': _('Tasks'),
-    'log_in': _('Sign in'),
-    'log_out': _('Log out'),
-    'registration': _('Sign up'),
-}
-
 
 class LabelView(LoginRequiredMixin, TemplateView):
 
@@ -30,7 +19,7 @@ class LabelView(LoginRequiredMixin, TemplateView):
         label_list = Label.objects.all()
         return render(request,
                       'labels/labels.html',
-                      context={'label_list': label_list} | NAVIGATION | table)
+                      context={'label_list': label_list} | table)
 
 
 class LabelCreateFormView(LoginRequiredMixin, TemplateView):
@@ -39,7 +28,7 @@ class LabelCreateFormView(LoginRequiredMixin, TemplateView):
         form = LabelForm()
         return render(request,
                       'labels/new_label.html',
-                      context={'form': form} | NAVIGATION)
+                      context={'form': form})
 
     def post(self, request, *args, **kwargs):
         form = LabelForm(request.POST)
@@ -49,7 +38,7 @@ class LabelCreateFormView(LoginRequiredMixin, TemplateView):
             return redirect('labels')
         return render(request,
                       'labels/new_label.html',
-                      context={'form': form} | NAVIGATION)
+                      context={'form': form})
 
 
 class LabelUpdateView(LoginRequiredMixin, TemplateView):
@@ -61,7 +50,7 @@ class LabelUpdateView(LoginRequiredMixin, TemplateView):
             form = LabelForm(instance=label)
             return render(request,
                           'labels/update_label.html',
-                          NAVIGATION | {'form': form, 'label_id': label_id})
+                          {'form': form, 'label_id': label_id})
         except Label.DoesNotExist:
             messages.add_message(request, messages.ERROR, _('Such label does not exist'))
         return redirect('labels')
@@ -75,7 +64,7 @@ class LabelUpdateView(LoginRequiredMixin, TemplateView):
             messages.add_message(request, messages.SUCCESS, _("The label has been updated"))
             return redirect('labels')
         return render(request, 'labels/update_label.html',
-                      NAVIGATION | {'form': form, 'label_id': label_id})
+                      {'form': form, 'label_id': label_id})
 
 
 class LabelDeleteView(LoginRequiredMixin, TemplateView):
@@ -88,7 +77,7 @@ class LabelDeleteView(LoginRequiredMixin, TemplateView):
             messages.add_message(request, messages.ERROR, _('Such status does not exist'))
             return redirect('statuses')
         return render(request, 'labels/delete_label.html',
-                      NAVIGATION | {'label_id': label_id, 'label_name': label.name})
+                      {'label_id': label_id, 'label_name': label.name})
 
     def post(self, request, *args, **kwargs):
         label_id = kwargs.get('pk')

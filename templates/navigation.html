@@ -1,6 +1,6 @@
 {% load bootstrap4 i18n %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-  <a class="navbar-brand" href="/">{% translate title %}</a>
+  <a class="navbar-brand" href="/">{% translate 'Task Manager' %}</a>
   <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarToggleExternalContent">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -8,17 +8,17 @@
   <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/users/">{% translate users %}</a>
+        <a class="nav-link" href="/users/">{% translate 'Users' %}</a>
       </li>
       {% if request.user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="/statuses/">{% translate statuses %}</a>
+        <a class="nav-link" href="/statuses/">{% translate 'Statuses' %}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/labels/">{% translate labels %}</a>
+        <a class="nav-link" href="/labels/">{% translate 'Labels' %}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/tasks/">{% translate tasks %}</a>
+        <a class="nav-link" href="/tasks/">{% translate 'Tasks' %}</a>
       </li>
       {% endif %}
     </ul>
@@ -26,10 +26,10 @@
     <ul class="navbar-nav">
       {% if not request.user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="/login/">{% translate log_in %}</a>
+        <a class="nav-link" href="/login/">{% translate 'Sign in' %}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/users/create/">{% translate registration %}</a>
+        <a class="nav-link" href="/users/create/">{% translate 'Sign up' %}</a>
       </li>
       {% else %}
       <li class="nav-item">
@@ -38,7 +38,7 @@
       <li class="nav-item">
         <form method="post" action="{% url 'logout' %}">
           {% csrf_token %}
-          <button type="submit" class="nav-link btn btn-link">{% translate log_out %}</button>
+          <button type="submit" class="nav-link btn btn-link">{% translate 'Log out' %}</button>
         </form>
       </li>
       {% endif %}
