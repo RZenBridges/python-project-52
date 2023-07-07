@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-07 19:52+0000\n"
+"POT-Creation-Date: 2023-07-07 20:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,6 +90,7 @@ msgstr "Статус"
 
 #: task_manager/task/forms.py:23 task_manager/task/service.py:27
 #: task_manager/task/views.py:164 templates/tasks/tasks.html:52
+#: templates/tasks/view_task.html:19
 msgid "Executor"
 msgstr "Исполнитель"
 
@@ -343,10 +344,6 @@ msgstr "Изменить задачу"
 #: templates/tasks/view_task.html:5
 msgid "Task view"
 msgstr "Просмотр задачи"
-
-#: templates/tasks/view_task.html:19
-msgid "Performer"
-msgstr ""
 
 #: templates/tasks/view_task.html:27
 msgid "created at"
