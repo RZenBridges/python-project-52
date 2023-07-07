@@ -112,7 +112,7 @@ msgstr "Задача с таким именем уже существует"
 
 #: task_manager/task/service.py:31
 msgid "My tasks only"
-msgstr "Мои задачи"
+msgstr "Только свои задачи"
 
 #: task_manager/task/tests.py:45 task_manager/task/views.py:45
 msgid "The task has been created"
