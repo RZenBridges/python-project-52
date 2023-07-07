@@ -23,9 +23,9 @@ class UserTest(TestCase):
 
     def test_create_user_db(self):
         self.user = get_user_model().objects.create_user(username=self.username,
-                                                         password1=self.password)
+                                                         password=self.password)
         login = self.client.login(username=self.username,
-                                  password1=self.password)
+                                  password=self.password)
         self.assertTrue(login)
 
     def test_create_user_form(self):
@@ -40,8 +40,8 @@ class UserTest(TestCase):
 
     def test_user_update_form(self):
         self.user = get_user_model().objects.create_user(username=self.username,
-                                                         password1=self.password)
-        self.client.login(username=self.username, password1=self.password)
+                                                         password=self.password)
+        self.client.login(username=self.username, password=self.password)
         response_update_user = self.client.post('/users/1/update/',
                                                 follow=True,
                                                 data=self.form_data)
@@ -49,8 +49,8 @@ class UserTest(TestCase):
 
     def test_user_delete_form(self):
         self.user = get_user_model().objects.create_user(username=self.username,
-                                                         password1=self.password)
-        self.client.login(username=self.username, password1=self.password)
+                                                         password=self.password)
+        self.client.login(username=self.username, password=self.password)
         response_delete_user = self.client.post('/users/1/delete/',
                                                 follow=True,
                                                 data=self.form_data)
