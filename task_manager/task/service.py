@@ -30,7 +30,7 @@ class TaskFilter(django_filters.FilterSet):
                                               label_suffix='',
                                               widget=forms.Select(
                                                   attrs={'class': 'form-control'}),
-                                              label=_('Labels'))
+                                              label=_('Label'))
     author = django_filters.BooleanFilter(method='author_filter',
                                           label_suffix='',
                                           widget=forms.CheckboxInput(
