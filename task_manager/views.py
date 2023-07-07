@@ -34,7 +34,7 @@ class UsersLoginView(TemplateView):
     def post(self, request, *args, **kwargs):
         try:
             user = User.objects.get(username=request.POST.get('username'))
-            if user.check_password(request.POST.get('password')):
+            if user.check_password(request.POST.get('password1')):
                 login(request, user)
                 messages.add_message(request, messages.SUCCESS, _('You have logged in'))
                 return redirect('home')
@@ -45,7 +45,7 @@ class UsersLoginView(TemplateView):
                 messages.ERROR,
                 _('Enter correct username and password. Both fields can becase-sensitive'))
             logging.warning(
-                'username and password are incorrect or such user is not registered')
+                'username or password are incorrect or such user is not registered')
 
         return redirect('login')
 

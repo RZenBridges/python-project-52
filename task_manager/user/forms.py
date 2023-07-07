@@ -16,6 +16,16 @@ class UserForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.label_suffix = ""
 
+    password1 = forms.CharField(
+        label=PASSWORD,
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': PASSWORD,
+            }
+        )
+    )
+
     password2 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
@@ -27,7 +37,7 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'password')
+        fields = ('first_name', 'last_name', 'username')
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -40,37 +50,35 @@ class UserForm(forms.ModelForm):
             'username': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': USERNAME,
-            }),
-            'password': forms.PasswordInput(attrs={
-                'class': 'form-control',
-                'placeholder': PASSWORD
             })
         }
         labels = {
             'first_name': FIRST_NAME,
             'last_name': LAST_NAME,
             'username': USERNAME,
-            'password': PASSWORD
+            'password': PASSWORD,
         }
+
         error_messages = {
             'username': {
                 'unique': _('This name is already taken by another user'),
             },
         }
 
-    def clean_password(self):
-        password = self.cleaned_data.get('password')
-        if len(password) < 3:
-            raise forms.ValidationError('The password is too short')
-        return password
-
     def clean_password2(self):
-        password = self.cleaned_data.get('password')
+        password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
 
-        if password != password2:
+        if password1 != password2:
             raise forms.ValidationError('Has to match the password')
         return password2
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data.get("password1"))
+        if commit:
+            user.save()
+        return user
 
     def clean_username(self):
         username = self.cleaned_data.get('username')

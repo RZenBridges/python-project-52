@@ -20,7 +20,7 @@ class InactiveUserAuthenticationForm(AuthenticationForm):
         ),
         label=_('Username'),
     )
-    password = forms.CharField(
+    password1 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
                 'class': 'form-control',
@@ -31,7 +31,7 @@ class InactiveUserAuthenticationForm(AuthenticationForm):
     )
 
     class Meta:
-        fields = ('username', 'password')
+        fields = ('username', 'password1')
 
     def confirm_login_allowed(self, user):
         if not user.is_active:
