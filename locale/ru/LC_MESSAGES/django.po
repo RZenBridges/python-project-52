@@ -275,7 +275,7 @@ msgstr "Обновить метку"
 #: templates/statuses/update_status.html:14 templates/tasks/update_task.html:51
 #: templates/users/update_user.html:53
 msgid "Update"
-msgstr "Обновить"
+msgstr "Изменить"
 
 #: templates/login.html:5 templates/navigation.html:29
 msgid "Sign in"
