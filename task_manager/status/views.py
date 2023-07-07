@@ -14,16 +14,10 @@ from .forms import StatusForm
 class StatusView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
-        table = {
-            'column_name': _('Status Name'),
-            'column_created': _('Created at'),
-            'row_edit': _('Edit'),
-            'row_delete': _('Delete'),
-        }
         statuses = Status.objects.all().order_by('id')
         return render(request,
                       'statuses/statuses.html',
-                      context={'status_list': statuses} | table)
+                      context={'status_list': statuses})
 
 
 class StatusCreateFormView(LoginRequiredMixin, TemplateView):

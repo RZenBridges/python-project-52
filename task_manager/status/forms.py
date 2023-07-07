@@ -6,6 +6,10 @@ from .models import Status
 
 class StatusForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
+
     class Meta:
 
         model = Status
@@ -17,7 +21,7 @@ class StatusForm(forms.ModelForm):
             })
         }
         labels = {
-            'name': _('Status Name')
+            'name': _('Status Name'),
         }
         error_messages = {
             'name': {

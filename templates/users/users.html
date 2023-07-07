@@ -7,9 +7,9 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>{% translate column_name %}</th>
-          <th>{% translate column_fname %}</th>
-          <th>{% translate column_created %}</th>
+          <th>{% translate 'Username' %}</th>
+          <th>{% translate 'Full name' %}</th>
+          <th>{% translate 'Created at' %}</th>
           <th></th>
         </tr>
       </thead>
@@ -21,9 +21,9 @@
           <td>{{ user.first_name }} {{ user.last_name }}</td>
           <td>{{ user.created_at }}</td>
           <td>
-            <a href="{% url 'user_update' pk=user.id %}">{% translate row_edit %}</a>
+            <a href="{% url 'user_update' pk=user.id %}">{% translate 'Edit' %}</a>
             <br>
-            <a href="{% url 'user_delete' pk=user.id %}">{% translate row_delete %}</a>
+            <a href="{% url 'user_delete' pk=user.id %}">{% translate 'Delete' %}</a>
           </td>
         </tr>
         {% endfor %}

@@ -13,17 +13,10 @@ from django.utils.decorators import method_decorator
 class UsersView(TemplateView):
 
     def get(self, request, *args, **kwargs):
-        table = {
-            'column_name': _('Username'),
-            'column_fname': _('Full name'),
-            'column_created': _('Created at'),
-            'row_edit': _('Edit'),
-            'row_delete': _('Delete'),
-        }
         users = User.objects.all().order_by('id')
         return render(request,
                       'users/users.html',
-                      context={'user_list': users} | table)
+                      context={'user_list': users})
 
 
 # CREATE USER page

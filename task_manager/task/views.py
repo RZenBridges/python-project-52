@@ -18,20 +18,10 @@ from task_manager.user.models import User
 class TaskView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
-        table = {
-            'column_name': _('Task name'),
-            'column_status': _('Status name'),
-            'column_author': _('Author'),
-            'column_performer': _('Performer'),
-            'column_created': _('Created at'),
-            'row_edit': _('Edit'),
-            'row_delete': _('Delete'),
-        }
-
-        f = TaskFilter(request.GET, queryset=Task.objects.all().order_by('id'),
+        f = TaskFilter(request.GET,
+                       queryset=Task.objects.all().order_by('id'),
                        current_user=request.user)
-
-        return render(request, 'tasks/tasks.html', context=table | {'filter': f})
+        return render(request, 'tasks/tasks.html', context={'filter': f})
 
 
 # CREATE TASK page

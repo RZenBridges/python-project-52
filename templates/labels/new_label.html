@@ -7,7 +7,7 @@
       {% csrf_token %}
 
       <div class="form-group">
-        {% translate form.name.label %}
+        {% translate form.name.label_tag %}
         {{ form.name }}
         {% for error in form.name.errors %}
             <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>

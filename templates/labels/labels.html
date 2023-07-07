@@ -8,8 +8,8 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>{% translate column_name %}</th>
-          <th>{% translate column_created %}</th>
+          <th>{% translate 'Label Name' %}</th>
+          <th>{% translate 'Created at' %}</th>
           <th></th>
         </tr>
       </thead>
@@ -20,9 +20,9 @@
           <td>{{ label.name }}</td>
           <td>{{ label.created_at }}</td>
           <td>
-            <a href="{% url 'label_update' pk=label.id %}">{% translate row_edit %}</a>
+            <a href="{% url 'label_update' pk=label.id %}">{% translate 'Edit' %}</a>
             <br>
-            <a href="{% url 'label_delete' pk=label.id %}">{% translate row_delete %}</a>
+            <a href="{% url 'label_delete' pk=label.id %}">{% translate 'Delete' %}</a>
           </td>
         </tr>
         {% endfor %}

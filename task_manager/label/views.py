@@ -13,16 +13,10 @@ from .models import Label
 class LabelView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
-        table = {
-            'column_name': _('Status name'),
-            'column_created': _('Created at'),
-            'row_edit': _('Edit'),
-            'row_delete': _('Delete'),
-        }
         label_list = Label.objects.all()
         return render(request,
                       'labels/labels.html',
-                      context={'label_list': label_list} | table)
+                      context={'label_list': label_list})
 
 
 class LabelCreateFormView(LoginRequiredMixin, TemplateView):
