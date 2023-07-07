@@ -104,7 +104,7 @@ msgstr "Имя"
 
 #: task_manager/task/forms.py:46 task_manager/task/forms.py:51
 msgid "Task Body"
-msgstr "Описание задачи"
+msgstr "Описание"
 
 #: task_manager/task/forms.py:55
 msgid "This name is already taken by another task"
