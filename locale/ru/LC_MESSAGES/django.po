@@ -51,6 +51,8 @@ msgid "The label has been deleted"
 msgstr "Метка успешно удалена"
 
 #: task_manager/label/views.py:17 task_manager/task/views.py:23
+#: task_manager/status/forms.py:16 task_manager/status/forms.py:20
+#: task_manager/status/views.py:18
 msgid "Status name"
 msgstr "Имя"
 
@@ -79,11 +81,6 @@ msgstr "Такая метка не существует"
 #: task_manager/status/views.py:100
 msgid "Such status does not exist"
 msgstr "Такой статус не существует"
-
-#: task_manager/status/forms.py:16 task_manager/status/forms.py:20
-#: task_manager/status/views.py:18
-msgid "Status Name"
-msgstr "Имя статуса"
 
 #: task_manager/status/forms.py:24
 msgid "This name is already taken by another status"
@@ -116,6 +113,7 @@ msgid "Labels"
 msgstr "Метки"
 
 #: task_manager/task/forms.py:42 task_manager/task/forms.py:50
+#: task_manager/task/views.py:22
 msgid "Task Name"
 msgstr "Имя"
 
@@ -142,10 +140,6 @@ msgstr "Задача успешно изменена"
 #: task_manager/task/tests.py:71 task_manager/task/views.py:151
 msgid "The task has been deleted"
 msgstr "Задача успешно удалена"
-
-#: task_manager/task/views.py:22
-msgid "Task name"
-msgstr "Имя задачи"
 
 #: task_manager/task/views.py:24 task_manager/task/views.py:177
 msgid "Author"
@@ -390,9 +384,6 @@ msgstr "Для подтверждения введите, пожалуйста, 
 #: templates/users/new_user.html:53
 msgid "Register"
 msgstr "Зарегистрировать"
-
-#~ msgid "task name"
-#~ msgstr "Имя задачи"
 
 #, fuzzy
 #~| msgid "Password"
