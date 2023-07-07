@@ -94,11 +94,11 @@ class UsersDeleteView(TemplateView):
 
         elif request.user.is_anonymous:
             messages.add_message(request, messages.ERROR,
-                                 _("You are not authenticated! Please, log in."))
+                                 _('You are not authenticated! Please, log in.'))
             return redirect('login')
 
         messages.add_message(request, messages.ERROR,
-                             _("You are not authorized to change other users."))
+                             _('You are not authorized to change other users.'))
         return redirect('users')
 
     @method_decorator(login_required)
@@ -108,7 +108,7 @@ class UsersDeleteView(TemplateView):
             user = User.objects.get(id=user_id)
             user.delete()
             messages.add_message(request, messages.SUCCESS,
-                                 _("The user has been deleted"))
+                                 _('The user has been deleted'))
         except User.DoesNotExist:
             messages.add_message(request, messages.ERROR,
                                  _('You are not authorized for this action'))

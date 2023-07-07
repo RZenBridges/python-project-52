@@ -50,3 +50,8 @@ class TaskForm(forms.ModelForm):
             'name': _('Task Name'),
             'body': _('Task Body'),
         }
+        error_messages = {
+            'name': {
+                'unique': _('This name is already taken by another task'),
+            },
+        }

@@ -3,11 +3,11 @@
 {% block content %}
   <div class="container wrapper flex-grow-1">
 
-    <h1 class="my-4">Удаление пользователя</h1>
-    <p>Вы уверены, что хотите удалить {{ fullname }} ?</p>
+    <h1 class="my-4">{% translate 'User deletion' %}</h1>
+    <p>{% translate 'Are you certain you want to delete' %} {{ fullname }} ?</p>
     <form action="{% url 'user_delete' user_id %}" method="post">
       {% csrf_token %}
-      <input class="btn btn-danger" type="submit" value="Да, удалить">
+      <input class="btn btn-danger" type="submit" value="{% translate 'Yes, I am' %}">
     </form>
 
   </div>

@@ -1,11 +1,12 @@
 import logging
 
+from django.contrib import messages
+from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
+
 from .forms import InactiveUserAuthenticationForm
-from django.contrib import messages
-from django.contrib.auth import login, logout
 from .user.models import User
 
 
@@ -27,6 +28,7 @@ class UsersLoginView(TemplateView):
         form = InactiveUserAuthenticationForm()
         if request.user.is_anonymous:
             return render(request, 'login.html', {'form': form})
+
         return redirect('home')
 
     def post(self, request, *args, **kwargs):
@@ -36,6 +38,7 @@ class UsersLoginView(TemplateView):
                 login(request, user)
                 messages.add_message(request, messages.SUCCESS, _('You have logged in'))
                 return redirect('home')
+
         except User.DoesNotExist:
             messages.add_message(
                 request,
@@ -43,6 +46,7 @@ class UsersLoginView(TemplateView):
                 _('Enter correct username and password. Both fields can becase-sensitive'))
             logging.warning(
                 'username and password are incorrect or such user is not registered')
+
         return redirect('login')
 
 

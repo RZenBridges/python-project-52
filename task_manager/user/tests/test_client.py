@@ -14,7 +14,7 @@ class UserTest(TestCase):
             'last_name': 'Verne',
             'username': self.username,
             'password': self.password,
-            'password_confirmation': self.password
+            'password2': self.password
         }
 
     def test_user_read(self):

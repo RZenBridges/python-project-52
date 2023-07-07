@@ -1,10 +1,13 @@
+import logging
+
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
+
 from .models import Status
 from .forms import StatusForm
-from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # ALL STATUSES page
@@ -33,7 +36,7 @@ class StatusCreateFormView(LoginRequiredMixin, TemplateView):
         form = StatusForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, _("The status has been created"))
+            messages.add_message(request, messages.SUCCESS, _('The status has been created'))
             return redirect('statuses')
         return render(request, 'statuses/new_status.html', {'form': form})
 
@@ -50,18 +53,26 @@ class StatusUpdateFormView(LoginRequiredMixin, TemplateView):
                           {'form': form, 'status_id': status_id})
         except Status.DoesNotExist:
             messages.add_message(request, messages.ERROR, _('Such status does not exist'))
+            logging.warning('Attempted get request to get a non-existing status')
         return redirect('statuses')
 
     def post(self, request, *args, **kwargs):
         status_id = kwargs.get('pk')
-        status = Status.objects.get(id=status_id)
-        form = StatusForm(request.POST, instance=status)
-        if form.is_valid():
-            form.save()
-            messages.add_message(request, messages.SUCCESS, _("The status has been updated"))
-            return redirect('statuses')
-        return render(request, 'statuses/update_status.html',
-                      {'form': form, 'status_id': status_id})
+        try:
+            status = Status.objects.get(id=status_id)
+            form = StatusForm(request.POST, instance=status)
+            if form.is_valid():
+                form.save()
+                messages.add_message(request, messages.SUCCESS, _('The status has been updated'))
+                return render(request,
+                              'statuses/update_status.html',
+                              {'form': form, 'status_id': status_id})
+        except Status.DoesNotExist:
+            messages.add_message(request, messages.ERROR,
+                                 _('Such status does not exist'))
+            logging.warning('Attempted post request to update a non-existing status')
+
+        return redirect('statuses')
 
 
 class StatusDeleteView(LoginRequiredMixin, TemplateView):
@@ -72,6 +83,7 @@ class StatusDeleteView(LoginRequiredMixin, TemplateView):
             status = Status.objects.get(id=status_id)
         except Status.DoesNotExist:
             messages.add_message(request, messages.ERROR, _('Such status does not exist'))
+            logging.warning('Attempted get request to get a non-existing status')
             return redirect('statuses')
         return render(request, 'statuses/delete_status.html',
                       {'status_id': status_id, 'status_name': status.name})
@@ -86,5 +98,5 @@ class StatusDeleteView(LoginRequiredMixin, TemplateView):
         except Status.DoesNotExist:
             messages.add_message(request, messages.ERROR,
                                  _('Such status does not exist'))
-        # If a task linked to the status exist then the status cannot be deleted
+            logging.warning('Attempted post request to delete a non-existing status')
         return redirect('statuses')

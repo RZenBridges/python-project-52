@@ -1,11 +1,13 @@
 from django import forms
-from .models import Status
 from django.utils.translation import gettext_lazy as _
+
+from .models import Status
 
 
 class StatusForm(forms.ModelForm):
 
     class Meta:
+
         model = Status
         fields = ('name', )
         widgets = {
@@ -16,6 +18,11 @@ class StatusForm(forms.ModelForm):
         }
         labels = {
             'name': _('Status Name')
+        }
+        error_messages = {
+            'name': {
+                'unique': _('This name is already taken by another status'),
+            },
         }
 
     def clean_name(self):
