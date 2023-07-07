@@ -45,6 +45,7 @@ class StatusUpdateFormView(LoginRequiredMixin, TemplateView):
             return render(request,
                           'statuses/update_status.html',
                           {'form': form, 'status_id': status_id})
+
         except Status.DoesNotExist:
             messages.add_message(request, messages.ERROR, _('Such status does not exist'))
             logging.warning('Attempted get request to get a non-existing status')
@@ -58,9 +59,11 @@ class StatusUpdateFormView(LoginRequiredMixin, TemplateView):
             if form.is_valid():
                 form.save()
                 messages.add_message(request, messages.SUCCESS, _('The status has been updated'))
-                return render(request,
-                              'statuses/update_status.html',
-                              {'form': form, 'status_id': status_id})
+                return redirect('statuses')
+            return render(request,
+                          'statuses/update_status.html',
+                          {'form': form, 'status_id': status_id})
+
         except Status.DoesNotExist:
             messages.add_message(request, messages.ERROR,
                                  _('Such status does not exist'))

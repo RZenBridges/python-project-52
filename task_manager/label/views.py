@@ -61,8 +61,9 @@ class LabelUpdateView(LoginRequiredMixin, TemplateView):
             if form.is_valid():
                 form.save()
                 messages.add_message(request, messages.SUCCESS, _('The label has been updated'))
-                return render(request, 'labels/update_label.html',
-                              {'form': form, 'label_id': label_id})
+                return redirect('labels')
+            return render(request, 'labels/update_label.html',
+                          {'form': form, 'label_id': label_id})
         except Label.DoesNotExist:
             messages.add_message(request, messages.ERROR, _('Such label does not exist'))
             logging.warning('Attempted post request to update a non-existing label')

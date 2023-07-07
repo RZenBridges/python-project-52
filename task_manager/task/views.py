@@ -8,7 +8,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView
 
 from .forms import TaskForm
-from .models import Task, Labeled
+from .models import Task
 from .service import TaskFilter
 from task_manager.label.models import Label
 from task_manager.user.models import User
@@ -35,13 +35,11 @@ class TaskCreateFormView(LoginRequiredMixin, TemplateView):
         data = request.POST.copy()
         data['author'] = User.objects.get(id=request.user.id)
         form = TaskForm(data)
-
         if form.is_valid():
-            form.save()
+            task = form.save()
             labels = data.getlist('labels')
             for label in labels:
-                Labeled(task=Task.objects.get(name=data['name']),
-                        label=Label.objects.get(name=label)).save()
+                task.labels.add(Label.objects.get(id=label))
             messages.add_message(request, messages.SUCCESS, _('The task has been created'))
             return redirect('tasks')
 
@@ -70,8 +68,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
             messages.add_message(request, messages.ERROR,
                                  _('Such task does not exist'))
             logging.warning('Attempted get request to get a non-existing task')
-
-        return redirect('tasks')
+            return redirect('tasks')
 
     def post(self, request, *args, **kwargs):
         task_id = kwargs.get('pk')
@@ -86,12 +83,11 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
             data = request.POST.copy()
             data['author'] = User.objects.get(id=request.user.id)
             form = TaskForm(data, instance=task)
-
             if form.is_valid():
                 form.save()
                 labels = data.getlist('labels')
-                for label in labels:
-                    Labeled(task=task, label=Label.objects.get(name=label)).save()
+                task.labels.set(list(filter(lambda x: str(x.id) in labels, Label.objects.all())))
+                task.save()
                 messages.add_message(request, messages.SUCCESS, _('The task has been updated'))
                 return redirect('tasks')
 
