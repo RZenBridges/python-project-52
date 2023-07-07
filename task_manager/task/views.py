@@ -58,7 +58,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
                 instance=task,
                 initial={
                     'status': task.status,
-                    'performer': task.performer,
+                    'executor': task.executor,
                     'labels': task.labels.all(),
                 }
             )
@@ -161,4 +161,4 @@ class TaskViewView(LoginRequiredMixin, TemplateView):
         return render(request,
                       'tasks/view_task.html',
                       {'task': task, 'task_labels': labels, 'author': _('Author'),
-                       'performer': _('Performer'), 'task_status': _('Status')})
+                       'executor': _('Executor'), 'task_status': _('Status')})

@@ -27,7 +27,7 @@ class TaskTest(TestCase):
 
     def test_create_task_db(self):
         task = Task.objects.create(name=self.task, status=self.status,
-                                   author=self.user, performer=self.user)
+                                   author=self.user, executor=self.user)
         task.labels.add(self.label)
         self.assertEqual(self.tasks.count(), 1)
 
@@ -36,10 +36,10 @@ class TaskTest(TestCase):
                                                 follow=True,
                                                 data={
                                                     'name': self.task,
-                                                    'body': self.task,
+                                                    'description': self.task,
                                                     'status': 1,
                                                     'author': 1,
-                                                    'performer': 1,
+                                                    'executor': 1,
                                                 })
         self.assertContains(response_create_task,
                             _('The task has been created'),
@@ -48,15 +48,15 @@ class TaskTest(TestCase):
 
     def test_update_task_form(self):
         Task.objects.create(name=self.task, status=self.status,
-                            author=self.user, performer=self.user)
+                            author=self.user, executor=self.user)
         response_update_task = self.client.post('/tasks/1/update/',
                                                 follow=True,
                                                 data={
                                                     'name': self.task,
-                                                    'body': self.task,
+                                                    'description': self.task,
                                                     'status': 1,
                                                     'author': 1,
-                                                    'performer': 1,
+                                                    'executor': 1,
                                                 })
         self.assertContains(response_update_task,
                             _('The task has been updated'),
@@ -64,7 +64,7 @@ class TaskTest(TestCase):
 
     def test_task_delete_form(self):
         Task.objects.create(name=self.task, status=self.status,
-                            author=self.user, performer=self.user)
+                            author=self.user, executor=self.user)
         response_delete_task = self.client.post('/tasks/1/delete/',
                                                 follow=True)
         self.assertContains(response_delete_task,

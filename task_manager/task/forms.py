@@ -19,8 +19,8 @@ class TaskForm(forms.ModelForm):
         empty_label='----',
     )
 
-    performer = forms.ModelChoiceField(
-        label=_('Performer'),
+    executor = forms.ModelChoiceField(
+        label=_('Executor'),
         queryset=User.objects.all(),
         widget=forms.Select(attrs={'class': 'regDropDown form-control'}),
         empty_label='----'
@@ -35,20 +35,20 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('name', 'body', 'status', 'performer', 'author')
+        fields = ('name', 'description', 'status', 'executor', 'author')
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': _('Task Name')
             }),
-            'body': forms.Textarea(attrs={
+            'description': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': _('Task Body'),
+                'placeholder': _('Task Description'),
             })
         }
         labels = {
             'name': _('Task Name'),
-            'body': _('Task Body'),
+            'description': _('Task Description'),
         }
         error_messages = {
             'name': {

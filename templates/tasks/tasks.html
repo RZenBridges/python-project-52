@@ -17,9 +17,9 @@
       </div>
 
       <div class="form-group">
-        {% translate filter.form.performer.label_tag %}
+        {% translate filter.form.executor.label_tag %}
         <div class="mr-3 ml-2">
-            {{ filter.form.performer }}
+            {{ filter.form.executor }}
         </div>
       </div>
 
@@ -49,7 +49,7 @@
           <th>{% translate 'Task Name' %}</th>
           <th>{% translate 'Status Name' %}</th>
           <th>{% translate 'Author' %}</th>
-          <th>{% translate 'Performer' %}</th>
+          <th>{% translate 'Executor' %}</th>
           <th>{% translate 'Created at' %}</th>
           <th></th>
         </tr>
@@ -61,7 +61,7 @@
           <td><a href="{% url 'task_view' pk=task.id %}">{{ task.name }}</a></td>
           <td>{{ task.status }}</td>
           <td>{{ task.author }}</td>
-          <td>{{ task.performer }}</td>
+          <td>{{ task.executor }}</td>
           <td>{{ task.created_at }}</td>
           <td>
             <a href="{% url 'task_update' pk=task.id %}">{% translate 'Edit' %}</a>

@@ -16,10 +16,10 @@
 
 
       <div class="form-group">
-        {% translate form.body.label_tag %}
-        {{ form.body }}
+        {% translate form.description.label_tag %}
+        {{ form.description }}
       </div>
-        {% for error in form.body.errors %}
+        {% for error in form.description.errors %}
             <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
         {% endfor %}
 
@@ -32,10 +32,10 @@
         {% endfor %}
 
       <div class="form-group">
-        {% translate form.performer.label_tag %}
-        {{ form.performer }}
+        {% translate form.executor.label_tag %}
+        {{ form.executor }}
       </div>
-        {% for error in form.performer.errors %}
+        {% for error in form.executor.errors %}
             <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
         {% endfor %}
 
