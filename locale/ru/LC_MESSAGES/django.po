@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-07 15:28+0000\n"
+"POT-Creation-Date: 2023-07-07 19:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,18 +47,18 @@ msgstr "Метка успешно создана"
 msgid "The label has been updated"
 msgstr "Метка успешно изменена"
 
-#: task_manager/label/tests.py:48 task_manager/label/views.py:92
+#: task_manager/label/tests.py:48 task_manager/label/views.py:93
 msgid "The label has been deleted"
 msgstr "Метка успешно удалена"
 
-#: task_manager/label/views.py:52 task_manager/label/views.py:67
-#: task_manager/label/views.py:95
+#: task_manager/label/views.py:52 task_manager/label/views.py:68
+#: task_manager/label/views.py:96
 msgid "Such label does not exist"
 msgstr "Такая метка не существует"
 
-#: task_manager/label/views.py:80 task_manager/status/views.py:49
-#: task_manager/status/views.py:66 task_manager/status/views.py:79
-#: task_manager/status/views.py:94
+#: task_manager/label/views.py:81 task_manager/status/views.py:50
+#: task_manager/status/views.py:69 task_manager/status/views.py:82
+#: task_manager/status/views.py:97
 msgid "Such status does not exist"
 msgstr "Такой статус не существует"
 
@@ -75,25 +75,28 @@ msgstr "Статус с таким именем уже существует"
 msgid "The status has been created"
 msgstr "Статус успешно создан"
 
-#: task_manager/status/tests.py:40 task_manager/status/views.py:60
+#: task_manager/status/tests.py:40 task_manager/status/views.py:61
 msgid "The status has been updated"
 msgstr "Статус успешно изменен"
 
-#: task_manager/status/tests.py:48 task_manager/status/views.py:91
+#: task_manager/status/tests.py:48 task_manager/status/views.py:94
 msgid "The status has been deleted"
 msgstr "Статус успешно удален"
 
-#: task_manager/task/forms.py:16 task_manager/task/views.py:168
+#: task_manager/task/forms.py:16 task_manager/task/service.py:21
+#: task_manager/task/views.py:164
 msgid "Status"
 msgstr "Статус"
 
-#: task_manager/task/forms.py:23 task_manager/task/views.py:168
-#: templates/tasks/tasks.html:52 templates/tasks/view_task.html:19
+#: task_manager/task/forms.py:23 task_manager/task/service.py:27
+#: task_manager/task/views.py:164 templates/tasks/tasks.html:52
+#: templates/tasks/view_task.html:19
 msgid "Performer"
 msgstr "Исполнитель"
 
-#: task_manager/task/forms.py:30 templates/labels/labels.html:5
-#: templates/navigation.html:18 templates/tasks/view_task.html:32
+#: task_manager/task/forms.py:30 task_manager/task/service.py:33
+#: templates/labels/labels.html:5 templates/navigation.html:18
+#: templates/tasks/view_task.html:32
 msgid "Labels"
 msgstr "Метки"
 
@@ -110,34 +113,34 @@ msgstr "Описание"
 msgid "This name is already taken by another task"
 msgstr "Задача с таким именем уже существует"
 
-#: task_manager/task/service.py:31
+#: task_manager/task/service.py:38
 msgid "My tasks only"
 msgstr "Только свои задачи"
 
-#: task_manager/task/tests.py:45 task_manager/task/views.py:45
+#: task_manager/task/tests.py:45 task_manager/task/views.py:43
 msgid "The task has been created"
 msgstr "Задача успешно создана"
 
-#: task_manager/task/tests.py:62 task_manager/task/views.py:95
+#: task_manager/task/tests.py:62 task_manager/task/views.py:91
 msgid "The task has been updated"
 msgstr "Задача успешно изменена"
 
-#: task_manager/task/tests.py:71 task_manager/task/views.py:141
+#: task_manager/task/tests.py:71 task_manager/task/views.py:137
 msgid "The task has been deleted"
 msgstr "Задача успешно удалена"
 
-#: task_manager/task/views.py:71 task_manager/task/views.py:103
-#: task_manager/task/views.py:123 task_manager/task/views.py:145
-#: task_manager/task/views.py:162
+#: task_manager/task/views.py:69 task_manager/task/views.py:99
+#: task_manager/task/views.py:119 task_manager/task/views.py:141
+#: task_manager/task/views.py:158
 msgid "Such task does not exist"
 msgstr "Такая задача не существует"
 
-#: task_manager/task/views.py:83 task_manager/task/views.py:119
-#: task_manager/task/views.py:137
+#: task_manager/task/views.py:80 task_manager/task/views.py:115
+#: task_manager/task/views.py:133
 msgid "You need to be the creator of the task to delete it"
 msgstr "Удалить задачу может только ее создатель"
 
-#: task_manager/task/views.py:167 templates/tasks/tasks.html:51
+#: task_manager/task/views.py:163 templates/tasks/tasks.html:51
 msgid "Author"
 msgstr "Автор"
 
@@ -261,8 +264,8 @@ msgstr "Создать"
 msgid "Update label"
 msgstr "Обновить метку"
 
-#: templates/labels/update_label.html:14
-#: templates/statuses/update_status.html:14 templates/tasks/update_task.html:51
+#: templates/labels/update_label.html:17
+#: templates/statuses/update_status.html:17 templates/tasks/update_task.html:51
 #: templates/users/update_user.html:53
 msgid "Update"
 msgstr "Изменить"

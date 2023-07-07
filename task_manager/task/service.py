@@ -16,16 +16,23 @@ class TaskFilter(django_filters.FilterSet):
     status = django_filters.ModelChoiceFilter(method='status_filter',
                                               queryset=Status.objects.all(),
                                               widget=forms.Select(
-                                                  attrs={'class': 'form-control'}))
+                                                  attrs={'class': 'form-control'}),
+                                              label_suffix='',
+                                              label=_('Status'))
     performer = django_filters.ModelChoiceFilter(method='performer_filter',
                                                  queryset=User.objects.all(),
                                                  widget=forms.Select(
-                                                     attrs={'class': 'form-control'}))
+                                                     attrs={'class': 'form-control'}),
+                                                 label_suffix='',
+                                                 label=_('Performer'))
     labels = django_filters.ModelChoiceFilter(method='labels_filter',
                                               queryset=Label.objects.all(),
+                                              label_suffix='',
                                               widget=forms.Select(
-                                                  attrs={'class': 'form-control'}))
+                                                  attrs={'class': 'form-control'}),
+                                              label=_('Labels'))
     author = django_filters.BooleanFilter(method='author_filter',
+                                          label_suffix='',
                                           widget=forms.CheckboxInput(
                                               attrs={'class': 'form-check'}),
                                           label=_('My tasks only'))
