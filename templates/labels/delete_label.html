@@ -4,8 +4,8 @@
   <div class="container wrapper flex-grow-1">
 
     <h1 class="my-4">{% translate 'Label deletion' %}</h1>
-    <p> {% translate 'Are you certain you want to delete the label' %} '{{ label_name }}' ?</p>
-    <form action="{% url 'label_delete' label_id %}" method="post">
+    <p> {% translate 'Are you certain you want to delete the label' %} '{{ label.name }}' ?</p>
+    <form action="{% url 'label_delete' label.id %}" method="post">
       {% csrf_token %}
       <input class="btn btn-danger" type="submit" value="{% translate 'Yes, I am' %}">
     </form>

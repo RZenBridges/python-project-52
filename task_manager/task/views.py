@@ -2,148 +2,77 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
+from django.urls import reverse_lazy
 
 from .forms import TaskForm
 from .models import Task
 from .service import TaskFilter
-from task_manager.label.models import Label
-from task_manager.user.models import User
+from task_manager.custom_mixins import CustomTaskDeletionMixin
 
 
 # ALL TASKS page
-class TaskView(LoginRequiredMixin, TemplateView):
+class TaskView(LoginRequiredMixin, ListView):
+    model = Task
+    template_name = 'tasks/tasks.html'
 
-    def get(self, request, *args, **kwargs):
-        f = TaskFilter(request.GET,
-                       queryset=Task.objects.all().order_by('id'),
-                       current_user=request.user)
-        return render(request, 'tasks/tasks.html', context={'filter': f})
+    def get_context_data(self, **kwargs):
+        kwargs.update(
+            {'filter': TaskFilter(
+                self.request.GET,
+                queryset=Task.objects.all().order_by('id'),
+                current_user=self.request.user)}
+        )
+        return kwargs
 
 
 # CREATE TASK page
-class TaskCreateFormView(LoginRequiredMixin, TemplateView):
+class TaskCreateFormView(LoginRequiredMixin, CreateView):
+    model = Task
+    form_class = TaskForm
 
-    def get(self, request, *args, **kwargs):
-        form = TaskForm()
-        return render(request, 'tasks/new_task.html', {'form': form})
+    success_url = reverse_lazy('tasks')
+    template_name = 'tasks/new_task.html'
 
-    def post(self, request, *args, **kwargs):
-        data = request.POST.copy()
-        data['author'] = User.objects.get(id=request.user.id)
-        form = TaskForm(data)
-        if form.is_valid():
-            task = form.save()
-            labels = data.getlist('labels')
-            for label in labels:
-                task.labels.add(Label.objects.get(id=label))
-            messages.add_message(request, messages.SUCCESS, _('The task has been created'))
-            return redirect('tasks')
-
-        return render(request, 'tasks/new_task.html', {'form': form})
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.author = user
+        messages.add_message(self.request, messages.SUCCESS, _('The task has been created'))
+        return super().form_valid(form)
 
 
 # UPDATE TASK page
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
+    model = Task
+    form_class = TaskForm
 
-    def get(self, request, *args, **kwargs):
-        task_id = kwargs.get('pk')
+    template_name = 'tasks/update_task.html'
+    success_url = reverse_lazy('tasks')
 
-        try:
-            task = Task.objects.get(id=task_id)
-            form = TaskForm(
-                instance=task,
-                initial={
-                    'status': task.status,
-                    'executor': task.executor,
-                    'labels': task.labels.all(),
-                }
-            )
-            return render(request, 'tasks/update_task.html', {'form': form, 'task_id': task_id})
-
-        except Task.DoesNotExist:
-            messages.add_message(request, messages.ERROR,
-                                 _('Such task does not exist'))
-            logging.warning('Attempted get request to get a non-existing task')
-            return redirect('tasks')
-
-    def post(self, request, *args, **kwargs):
-        task_id = kwargs.get('pk')
-
-        try:
-            task = Task.objects.get(id=task_id)
-            if not task.author_id == request.user.id:
-                messages.add_message(request, messages.ERROR,
-                                     _('You need to be the creator of the task to delete it'))
-                return redirect('tasks')
-
-            data = request.POST.copy()
-            data['author'] = User.objects.get(id=request.user.id)
-            form = TaskForm(data, instance=task)
-            if form.is_valid():
-                form.save()
-                labels = data.getlist('labels')
-                task.labels.set(list(filter(lambda x: str(x.id) in labels, Label.objects.all())))
-                task.save()
-                messages.add_message(request, messages.SUCCESS, _('The task has been updated'))
-                return redirect('tasks')
-
-            return render(request, 'tasks/update_task.html',
-                          {'form': form, 'task_id': task_id})
-
-        except Task.DoesNotExist:
-            messages.add_message(request, messages.ERROR,
-                                 _('Such task does not exist'))
-            logging.warning('Attempted post request to update a non-existing task')
-
-        return redirect('tasks')
+    def form_valid(self, form):
+        self.object = form.save()
+        messages.add_message(self.request, messages.SUCCESS, _('The task has been updated'))
+        return HttpResponseRedirect(self.get_success_url())
 
 
 # DELETE TASK page
-class TaskDeleteView(LoginRequiredMixin, TemplateView):
+class TaskDeleteView(CustomTaskDeletionMixin, DeleteView):
+    model = Task
 
-    def get(self, request, *args, **kwargs):
-        task_id = kwargs.get('pk')
+    template_name = 'tasks/delete_task.html'
+    success_url = reverse_lazy('tasks')
 
-        try:
-            task = Task.objects.get(id=task_id)
-            if not task.author_id == request.user.id:
-                messages.add_message(request, messages.ERROR,
-                                     _('You need to be the creator of the task to delete it'))
-                return redirect('tasks')
-
-        except Task.DoesNotExist:
-            messages.add_message(request, messages.ERROR, _('Such task does not exist'))
-            logging.warning('Attempted get request to get a non-existing task')
-            return redirect('tasks')
-
-        return render(request, 'tasks/delete_task.html',
-                      {'task_id': task_id, 'task_name': task.name})
-
-    def post(self, request, *args, **kwargs):
-        task_id = kwargs.get('pk')
-
-        try:
-            task = Task.objects.get(id=task_id)
-            if not task.author_id == request.user.id:
-                messages.add_message(request, messages.ERROR,
-                                     _('You need to be the creator of the task to delete it'))
-                return redirect('tasks')
-            task.delete()
-            messages.add_message(request, messages.SUCCESS,
-                                 _('The task has been deleted'))
-
-        except Task.DoesNotExist:
-            messages.add_message(request, messages.ERROR,
-                                 _('Such task does not exist'))
-            logging.warning('Attempted post request to delete a non-existing task')
-
-        return redirect('tasks')
+    def form_valid(self, form):
+        self.object.delete()
+        messages.add_message(self.request, messages.SUCCESS, _('The task has been deleted'))
+        return HttpResponseRedirect(self.get_success_url())
 
 
+# TASK DETAILS page
 class TaskViewView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
@@ -161,4 +90,4 @@ class TaskViewView(LoginRequiredMixin, TemplateView):
         return render(request,
                       'tasks/view_task.html',
                       {'task': task, 'task_labels': labels, 'author': _('Author'),
-                       'executor': _('Executor'), 'task_status': _('Status')})
+                       'executor': _('Executor'), 'status': _('Status')})
