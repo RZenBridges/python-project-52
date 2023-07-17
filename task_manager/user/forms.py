@@ -1,10 +1,10 @@
-import re
+# import re
 from django import forms
 from .models import User
 from django.utils.translation import gettext_lazy as _
 
 from django.contrib.auth.forms import AuthenticationForm
-from django.core.exceptions import ValidationError
+# from django.core.exceptions import ValidationError
 
 FIRST_NAME = _('First Name')
 LAST_NAME = _('Last Name')

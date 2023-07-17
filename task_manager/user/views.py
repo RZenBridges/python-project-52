@@ -2,8 +2,8 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth import login, logout
-from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
+# from django.contrib.auth.views import LoginView
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
