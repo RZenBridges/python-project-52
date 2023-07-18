@@ -1,17 +1,15 @@
-import logging
-
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
 from django.utils.translation import gettext as _
-from django.views.generic.base import TemplateView
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 
 from .forms import TaskForm
 from .models import Task
-from .service import TaskFilter
+from .filters import TaskFilter
 from task_manager.custom_mixins import CustomTaskDeletionMixin
 
 
@@ -73,21 +71,8 @@ class TaskDeleteView(CustomTaskDeletionMixin, DeleteView):
 
 
 # TASK DETAILS page
-class TaskViewView(LoginRequiredMixin, TemplateView):
+class TaskDetailView(LoginRequiredMixin, DetailView):
+    model = Task
+    template_name = 'tasks/view_task.html'
 
-    def get(self, request, *args, **kwargs):
-        task_id = kwargs.get('pk')
-
-        try:
-            task = Task.objects.get(id=task_id)
-            labels = task.labels.all()
-
-        except Task.DoesNotExist:
-            messages.add_message(request, messages.ERROR,
-                                 _('Such task does not exist'))
-            logging.warning('Attempted get request to get a non-existing task')
-
-        return render(request,
-                      'tasks/view_task.html',
-                      {'task': task, 'task_labels': labels, 'author': _('Author'),
-                       'executor': _('Executor'), 'status': _('Status')})
+    context_object_name = 'task'

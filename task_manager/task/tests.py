@@ -21,15 +21,17 @@ class TaskTest(TestCase):
         self.status = Status.objects.get(name='test_status')
         self.label = Label.objects.get(name='test_label')
 
-    def test_task_read(self):
-        response = self.client.get('/tasks/')
-        self.assertEqual(response.status_code, 200)
-
     def test_create_task_db(self):
         task = Task.objects.create(name=self.task, status=self.status,
                                    author=self.user, executor=self.user)
         task.labels.add(self.label)
         self.assertEqual(self.tasks.count(), 1)
+        self.assertTrue(all((
+            self.tasks.first().name == self.task,
+            self.tasks.first().status == self.status,
+            self.tasks.first().executor == self.user,
+            self.tasks.first().author == self.user,
+        )))
 
     def test_create_task_form(self):
         response_create_task = self.client.post('/tasks/create/',
@@ -37,14 +39,20 @@ class TaskTest(TestCase):
                                                 data={
                                                     'name': self.task,
                                                     'description': self.task,
-                                                    'status': 1,
-                                                    'author': 1,
-                                                    'executor': 1,
+                                                    'status': self.status.id,
+                                                    'author': self.user.id,
+                                                    'executor': self.user.id,
                                                 })
         self.assertContains(response_create_task,
                             _('The task has been created'),
                             status_code=200)
         self.assertEqual(self.tasks.count(), 1)
+        self.assertTrue(all((
+            self.tasks.first().name == self.task,
+            self.tasks.first().status == self.status,
+            self.tasks.first().executor == self.user,
+            self.tasks.first().author == self.user,
+        )))
 
     def test_update_task_form(self):
         Task.objects.create(name=self.task, status=self.status,
@@ -54,13 +62,14 @@ class TaskTest(TestCase):
                                                 data={
                                                     'name': self.task,
                                                     'description': self.task,
-                                                    'status': 1,
-                                                    'author': 1,
-                                                    'executor': 1,
+                                                    'status': self.status.id,
+                                                    'author': self.user.id,
+                                                    'executor': self.user.id,
                                                 })
         self.assertContains(response_update_task,
                             _('The task has been updated'),
                             status_code=200)
+        self.assertTrue(self.tasks.first().description == self.task)
 
     def test_task_delete_form(self):
         Task.objects.create(name=self.task, status=self.status,
@@ -70,3 +79,4 @@ class TaskTest(TestCase):
         self.assertContains(response_delete_task,
                             _('The task has been deleted'),
                             status_code=200)
+        self.assertEqual(self.tasks.count(), 0)

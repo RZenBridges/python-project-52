@@ -1,8 +1,5 @@
-import logging
-
 from django.contrib import messages
 from django.contrib.auth import login, logout
-# from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -58,27 +55,14 @@ class UsersDeleteView(CustomLoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('users')
 
     def form_valid(self, form):
+        if self.object.executor.count() > 0:
+            messages.add_message(self.request,
+                                 messages.ERROR,
+                                 _('You cannot delete the user that is ascribed a task'))
+            return HttpResponseRedirect(self.get_success_url())
         self.object.delete()
         messages.add_message(self.request, messages.SUCCESS, _('The user has been deleted'))
         return HttpResponseRedirect(self.get_success_url())
-
-
-# LOGIN USER page
-# class UsersLoginView(LoginView):
-#     template_name = 'login.html'
-#     authentication_form = InactiveUserAuthenticationForm
-#     redirect_authenticated_user = True
-#
-#     success_message = _('You have logged in')
-#     success_url = reverse_lazy('home')
-#
-#
-#     def form_invalid(self, form):
-#         messages.add_message(
-#                     self.request,
-#                     messages.ERROR,
-#                     _('Enter correct username and password. Both fields can becase-sensitive'))
-#         return super().form_invalid(form)
 
 
 class UsersLoginView(TemplateView):
@@ -98,13 +82,13 @@ class UsersLoginView(TemplateView):
                 return redirect('home')
 
         except User.DoesNotExist:
-            messages.add_message(
-                request,
-                messages.ERROR,
-                _('Enter correct username and password. Both fields can becase-sensitive'))
-            logging.warning(
-                'username or password are incorrect or such user is not registered')
+            pass
 
+        messages.add_message(
+            request,
+            messages.ERROR,
+            _('Enter correct username and password. Both fields can be case-sensitive')
+        )
         return redirect('login')
 
 

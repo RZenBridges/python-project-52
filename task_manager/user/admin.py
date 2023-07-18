@@ -7,4 +7,4 @@ from .models import User
 class UsersAdmin(admin.ModelAdmin):
     list_display = ('username', 'first_name', 'last_name', 'date_joined')
     search_fields = ['username', 'first_name', 'last_name', 'date_joined']
-    list_filter = (('created_at', admin.DateFieldListFilter), )
+    list_filter = (('date_joined', admin.DateFieldListFilter), )
