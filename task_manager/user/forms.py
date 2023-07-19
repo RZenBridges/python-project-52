@@ -4,15 +4,11 @@ from .models import User
 from django.utils.translation import gettext_lazy as _
 
 from django.contrib.auth.forms import AuthenticationForm
-# from django.core.exceptions import ValidationError
-
-FIRST_NAME = _('First Name')
-LAST_NAME = _('Last Name')
-USERNAME = _('Username')
-PASSWORD = _('Password')
 
 
 class UserForm(forms.ModelForm):
+
+    PASSWORD = _('Password')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -38,6 +34,11 @@ class UserForm(forms.ModelForm):
     )
 
     class Meta:
+        FIRST_NAME = _('First Name')
+        LAST_NAME = _('Last Name')
+        USERNAME = _('Username')
+        PASSWORD = _('Password')
+
         model = User
         fields = ('first_name', 'last_name', 'username')
         widgets = {
@@ -116,10 +117,3 @@ class InactiveUserAuthenticationForm(AuthenticationForm):
         ),
         label=_('Password')
     )
-
-    class Meta:
-        fields = ('username', 'password1')
-
-    # def confirm_login_allowed(self, user):
-    #     if not user.is_active:
-    #         raise ValidationError('This account is inactive', code='inactive')

@@ -1,6 +1,7 @@
 from django import forms
-from .models import Task
 from django.utils.translation import gettext_lazy as _
+
+from .models import Task
 
 
 class TaskForm(forms.ModelForm):

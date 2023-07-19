@@ -13,20 +13,17 @@ class TaskFilter(django_filters.FilterSet):
         self.current_user = kwargs.pop('current_user')
         super(TaskFilter, self).__init__(*args, **kwargs)
 
-    status = django_filters.ModelChoiceFilter(method='status_filter',
-                                              queryset=Status.objects.all(),
+    status = django_filters.ModelChoiceFilter(queryset=Status.objects.all(),
                                               widget=forms.Select(
                                                   attrs={'class': 'form-control'}),
                                               label_suffix='',
                                               label=_('Status'))
-    executor = django_filters.ModelChoiceFilter(method='executor_filter',
-                                                queryset=User.objects.all(),
+    executor = django_filters.ModelChoiceFilter(queryset=User.objects.all(),
                                                 widget=forms.Select(
                                                     attrs={'class': 'form-control'}),
                                                 label_suffix='',
                                                 label=_('Executor'))
-    labels = django_filters.ModelChoiceFilter(method='labels_filter',
-                                              queryset=Label.objects.all(),
+    labels = django_filters.ModelChoiceFilter(queryset=Label.objects.all(),
                                               label_suffix='',
                                               widget=forms.Select(
                                                   attrs={'class': 'form-control'}),
@@ -36,15 +33,6 @@ class TaskFilter(django_filters.FilterSet):
                                           widget=forms.CheckboxInput(
                                               attrs={'class': 'form-check'}),
                                           label=_('My tasks only'))
-
-    def status_filter(self, queryset, name, value):
-        return queryset.filter(**{name: value})
-
-    def executor_filter(self, queryset, name, value):
-        return queryset.filter(**{name: value})
-
-    def labels_filter(self, queryset, name, value):
-        return queryset.filter(**{name: value})
 
     def author_filter(self, queryset, name, value):
         if value is True:
