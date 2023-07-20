@@ -90,5 +90,5 @@ class UsersLogoutView(LogoutView):
     next_page = reverse_lazy('home')
 
     def dispatch(self, request, *args, **kwargs):
-        messages.add_message(request, messages.INFO, _('You have logged out.'))
+        messages.add_message(request, messages.INFO, _('You have logged out'))
         return super().dispatch(request, *args, **kwargs)
