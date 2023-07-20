@@ -1,7 +1,7 @@
 from django.contrib import messages
-from django.contrib.auth import login, logout
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.views.generic.base import TemplateView
+from django.contrib.auth import login
+from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
@@ -65,37 +65,30 @@ class UsersDeleteView(CustomLoginRequiredMixin, DeleteView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class UsersLoginView(TemplateView):
-    def get(self, request, *args, **kwargs):
-        form = InactiveUserAuthenticationForm()
-        if request.user.is_anonymous:
-            return render(request, 'login.html', {'form': form})
+# LOGIN USER page
+class UsersLoginView(LoginView):
+    model = User
+    form_class = InactiveUserAuthenticationForm
+    redirect_authenticated_user = True
+    template_name = 'login.html'
 
-        return redirect('home')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, _('You have logged in'))
+        return reverse_lazy('home')
 
-    def post(self, request, *args, **kwargs):
-        try:
-            user = User.objects.get(username=request.POST.get('username'))
-            if user.check_password(request.POST.get('password1')):
-                login(request, user)
-                messages.add_message(request, messages.SUCCESS, _('You have logged in'))
-                return redirect('home')
-
-        except User.DoesNotExist:
-            pass
-
+    def form_invalid(self, form):
         messages.add_message(
-            request,
+            self.request,
             messages.ERROR,
             _('Enter correct username and password. Both fields can be case-sensitive')
         )
-        return redirect('login')
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 # LOGOUT USER page
-class UsersLogoutView(TemplateView):
+class UsersLogoutView(LogoutView):
+    next_page = reverse_lazy('home')
 
-    def post(self, request, *args, **kwargs):
-        logout(request)
-        messages.add_message(request, messages.INFO, _('You have logged out'))
-        return redirect('home')
+    def dispatch(self, request, *args, **kwargs):
+        messages.add_message(request, messages.INFO, _('You have logged out.'))
+        return super().dispatch(request, *args, **kwargs)

@@ -108,7 +108,7 @@ class InactiveUserAuthenticationForm(AuthenticationForm):
         ),
         label=_('Username'),
     )
-    password1 = forms.CharField(
+    password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
                 'class': 'form-control',

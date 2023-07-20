@@ -79,7 +79,7 @@ class UserTest(TestCase):
                                                follow=True,
                                                data={
                                                    'username': self.username,
-                                                   'password1': self.password,
+                                                   'password': self.password,
                                                })
         self.assertContains(
             response_login_user,
