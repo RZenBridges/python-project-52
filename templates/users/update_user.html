@@ -1,57 +1,12 @@
 {% extends '../layout.html' %}
-{% load bootstrap4 i18n %}
+{% load bootstrap5 i18n %}
 {% block content %}
-  <div class="container wrapper flex-grow-1">
-    <h1 class="my-4">Изменение пользователя</h1>
-    <form method="post">
-      {% csrf_token %}
 
-      <div class="form-group">
-        {% translate form.first_name.label_tag %}
-        {{ form.first_name }}
-      </div>
-      <div class="form-group">
-        {% translate form.last_name.label_tag %}
-        {{ form.last_name }}
-      </div>
-      <div class="form-group">
-        {% translate form.username.label_tag %}
-        {{ form.username }}
+<h1 class="my-4">{% translate 'Update user' %}</h1>
 
-        {% for error in form.username.errors %}
-            <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
-        {% endfor %}
-
-        <small class="form-text text-muted">{% translate 'Necessary field. 150 characters max. Only letters, digits and symbols @/./+/-/_.' %}
-        </small>
-      </div>
-      <div class="form-group">
-        {% translate form.password1.label_tag %}
-        {{ form.password1 }}
-
-        {% for error in form.password1.errors %}
-            <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
-        {% endfor %}
-
-        <small class="form-text text-muted">
-          <ul>
-            <li>{% translate 'Your password has to contain 3 characters at least.' %}</li>
-          </ul>
-        </small>
-      </div>
-      <div class="form-group">
-        {% translate form.password2.label_tag %}
-        {{ form.password2 }}
-
-        {% for error in form.password2.errors %}
-            <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
-        {% endfor %}
-
-        <small class="form-text text-muted">{% translate 'For confirmation insert the password again, please.' %}</small>
-      </div>
-      <div class="form-group">
-        <input class="btn btn-primary" type="submit" value="{% translate 'Update' %}">
-      </div>
-    </form>
-  </div>
+<form class="text-left" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input role="button" class="btn btn-primary" type="submit" value="{% translate 'Update' %}" >
+</form>
 {% endblock content %}

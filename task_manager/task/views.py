@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.shortcuts import HttpResponseRedirect
 from django.utils.translation import gettext as _
 from django.views.generic import DetailView
@@ -10,7 +11,7 @@ from django.urls import reverse_lazy
 from .forms import TaskForm
 from .models import Task
 from .filters import TaskFilter
-from task_manager.custom_mixins import CustomTaskDeletionMixin
+from task_manager.mixins import CustomTaskDeletionMixin
 
 
 # ALL TASKS page

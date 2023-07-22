@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-18 18:52+0000\n"
+"POT-Creation-Date: 2023-07-22 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,18 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-
-#: task_manager/custom_mixins.py:13
-msgid "You are not authenticated! Please, log in."
-msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
-
-#: task_manager/custom_mixins.py:18
-msgid "You are not authorized to change other users."
-msgstr "У вас нет прав для изменения другого пользователя."
-
-#: task_manager/custom_mixins.py:29
-msgid "You need to be the creator of the task to delete it"
-msgstr "Удалить задачу может только ее создатель"
 
 #: task_manager/label/forms.py:18 task_manager/label/forms.py:22
 #: templates/labels/labels.html:11
@@ -53,6 +41,18 @@ msgstr "Метка успешно изменена"
 msgid "The label has been deleted"
 msgstr "Метка успешно удалена"
 
+#: task_manager/mixins.py:14
+msgid "You are not authenticated! Please, log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: task_manager/mixins.py:24
+msgid "You are not authorized to change other users."
+msgstr "У вас нет прав для изменения другого пользователя."
+
+#: task_manager/mixins.py:33
+msgid "You need to be the creator of the task to delete it"
+msgstr "Удалить задачу может только ее создатель"
+
 #: task_manager/status/forms.py:20 task_manager/status/forms.py:24
 #: templates/statuses/statuses.html:11 templates/tasks/tasks.html:50
 msgid "Status Name"
@@ -74,31 +74,39 @@ msgstr "Статус успешно изменен"
 msgid "The status has been deleted"
 msgstr "Статус успешно удален"
 
-#: task_manager/task/forms.py:17 task_manager/task/forms.py:35
-#: templates/tasks/tasks.html:49
-msgid "Task Name"
-msgstr "Имя"
-
-#: task_manager/task/forms.py:21 task_manager/task/forms.py:36
-msgid "Task Description"
-msgstr "Описание"
-
-#: task_manager/task/forms.py:37 task_manager/task/filters.py:21
+#: task_manager/task/filters.py:20 task_manager/task/forms.py:38
 #: templates/tasks/view_task.html:23
 msgid "Status"
 msgstr "Статус"
 
-#: task_manager/task/forms.py:38 task_manager/task/filters.py:27
+#: task_manager/task/filters.py:25 task_manager/task/forms.py:39
 #: templates/tasks/tasks.html:52 templates/tasks/view_task.html:19
 msgid "Executor"
 msgstr "Исполнитель"
 
-#: task_manager/task/forms.py:39 templates/labels/labels.html:5
+#: task_manager/task/filters.py:30
+msgid "Label"
+msgstr "Метка"
+
+#: task_manager/task/filters.py:35
+msgid "My tasks only"
+msgstr "Только свои задачи"
+
+#: task_manager/task/forms.py:18 task_manager/task/forms.py:36
+#: templates/tasks/tasks.html:49
+msgid "Task Name"
+msgstr "Имя"
+
+#: task_manager/task/forms.py:22 task_manager/task/forms.py:37
+msgid "Task Description"
+msgstr "Описание"
+
+#: task_manager/task/forms.py:40 templates/labels/labels.html:5
 #: templates/navigation.html:18 templates/tasks/view_task.html:32
 msgid "Labels"
 msgstr "Метки"
 
-#: task_manager/task/forms.py:43
+#: task_manager/task/forms.py:44
 msgid "This name is already taken by another task"
 msgstr "Задача с таким именем уже существует"
 
@@ -138,83 +146,46 @@ msgstr "Исполнитель"
 msgid "labels"
 msgstr "Метки"
 
-#: task_manager/task/filters.py:33
-msgid "Label"
-msgstr "Метка"
-
-#: task_manager/task/filters.py:38
-msgid "My tasks only"
-msgstr "Только свои задачи"
-
-#: task_manager/task/tests.py:47 task_manager/task/views.py:42
+#: task_manager/task/tests.py:47 task_manager/task/views.py:43
 msgid "The task has been created"
 msgstr "Задача успешно создана"
 
-#: task_manager/task/tests.py:70 task_manager/task/views.py:56
+#: task_manager/task/tests.py:70 task_manager/task/views.py:57
 msgid "The task has been updated"
 msgstr "Задача успешно изменена"
 
-#: task_manager/task/tests.py:80 task_manager/task/views.py:69
+#: task_manager/task/tests.py:80 task_manager/task/views.py:70
 msgid "The task has been deleted"
 msgstr "Задача успешно удалена"
 
-#: task_manager/user/forms.py:9
-msgid "First Name"
-msgstr "Имя"
-
-#: task_manager/user/forms.py:10
-msgid "Last Name"
-msgstr "Фамилия"
-
-#: task_manager/user/forms.py:11 task_manager/user/forms.py:105
-#: task_manager/user/forms.py:108 templates/users/users.html:10
-msgid "Username"
-msgstr "Имя пользователя"
-
-#: task_manager/user/forms.py:12 task_manager/user/forms.py:114
-#: task_manager/user/forms.py:117
-msgid "Password"
-msgstr "Пароль"
-
-#: task_manager/user/forms.py:35
-msgid "Password (again)"
-msgstr "Пароль (еще раз)"
-
-#: task_manager/user/forms.py:37
-msgid "Password Confirmation"
-msgstr "Подтверждение пароля"
-
-#: task_manager/user/forms.py:66
-msgid "This name is already taken by another user"
-msgstr "Пользователь с таким именем уже существует"
-
-#: task_manager/user/tests/test_client.py:41 task_manager/user/views.py:32
+#: task_manager/user/test.py:30 task_manager/user/views.py:31
 msgid "The user has been registered"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/user/tests/test_client.py:57 task_manager/user/views.py:47
+#: task_manager/user/test.py:46 task_manager/user/views.py:41
 msgid "The user has been updated"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/user/tests/test_client.py:71 task_manager/user/views.py:65
+#: task_manager/user/test.py:61 task_manager/user/views.py:58
+#: task_manager/user/views.py:64
 msgid "The user has been deleted"
 msgstr "Пользователь успешно удален"
 
-#: task_manager/user/views.py:62
-msgid "You cannot delete the user that is ascribed a task"
-msgstr ""
-
-#: task_manager/user/views.py:81
+#: task_manager/user/test.py:75 task_manager/user/views.py:80
 msgid "You have logged in"
 msgstr "Вы залогинены"
 
-#: task_manager/user/views.py:87
+#: task_manager/user/test.py:90 task_manager/user/views.py:81
 msgid "Enter correct username and password. Both fields can be case-sensitive"
 msgstr ""
 "Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут "
 "быть чувствительны к регистру."
 
-#: task_manager/user/views.py:97
+#: task_manager/user/views.py:59 task_manager/user/views.py:66
+msgid "You cannot delete the user that is ascribed a task"
+msgstr "Невозможно удалить пользователя, потому что он является исполнителем задачи"
+
+#: task_manager/user/views.py:89
 msgid "You have logged out"
 msgstr "Вы разлогинены"
 
@@ -222,7 +193,7 @@ msgstr "Вы разлогинены"
 msgid "Page not found"
 msgstr "Страница не найдена"
 
-#: templates/head.html:9 templates/navigation.html:3
+#: templates/head.html:8 templates/navigation.html:3
 msgid "Task Manager"
 msgstr "Менеджер задач"
 
@@ -248,7 +219,7 @@ msgstr "Вы уверены, что хотите удалить метку"
 
 #: templates/labels/delete_label.html:10
 #: templates/statuses/delete_status.html:10 templates/tasks/delete_task.html:10
-#: templates/users/delete_user.html:11
+#: templates/users/delete_user.html:9
 msgid "Yes, I am"
 msgstr "Да, удалить"
 
@@ -282,15 +253,15 @@ msgstr "Обновить метку"
 
 #: templates/labels/update_label.html:17
 #: templates/statuses/update_status.html:17 templates/tasks/update_task.html:51
-#: templates/users/update_user.html:53
+#: templates/users/update_user.html:10
 msgid "Update"
 msgstr "Изменить"
 
-#: templates/login.html:6 templates/navigation.html:29
+#: templates/login.html:5 templates/navigation.html:29
 msgid "Sign in"
 msgstr "Вход"
 
-#: templates/login.html:19
+#: templates/login.html:9
 msgid "Log in"
 msgstr "Войти"
 
@@ -374,37 +345,66 @@ msgstr "Изменить"
 msgid "delete"
 msgstr "Удалить"
 
-#: templates/users/delete_user.html:7
+#: templates/users/delete_user.html:5
 msgid "User deletion"
 msgstr "Удаление пользователя"
 
-#: templates/users/delete_user.html:8
+#: templates/users/delete_user.html:6
 msgid "Are you certain you want to delete"
 msgstr "Вы уверены, что хотите удалить пользователя"
 
-#: templates/users/new_user.html:25 templates/users/update_user.html:25
-msgid ""
-"Necessary field. 150 characters max. Only letters, digits and symbols @/./"
-"+/-/_."
-msgstr ""
-"Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./"
-"+/-/_."
+#: templates/users/new_user.html:4
+msgid "Registration"
+msgstr "Регистрация"
 
-#: templates/users/new_user.html:38 templates/users/update_user.html:38
-msgid "Your password has to contain 3 characters at least."
-msgstr "Ваш пароль должен содержать как минимум 3 символа."
-
-#: templates/users/new_user.html:50 templates/users/update_user.html:50
-msgid "For confirmation insert the password again, please."
-msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
-
-#: templates/users/new_user.html:53
+#: templates/users/new_user.html:9
 msgid "Register"
 msgstr "Зарегистрировать"
+
+#: templates/users/update_user.html:5
+#, fuzzy
+#| msgid "Update status"
+msgid "Update user"
+msgstr "Изменить статус"
+
+#: templates/users/users.html:10
+msgid "Username"
+msgstr "Имя пользователя"
 
 #: templates/users/users.html:11
 msgid "Full name"
 msgstr "Полное имя"
+
+#~ msgid "Password"
+#~ msgstr "Пароль"
+
+#~ msgid "First Name"
+#~ msgstr "Имя"
+
+#~ msgid "Last Name"
+#~ msgstr "Фамилия"
+
+#~ msgid "Password (again)"
+#~ msgstr "Пароль (еще раз)"
+
+#~ msgid "Password Confirmation"
+#~ msgstr "Подтверждение пароля"
+
+#~ msgid "This name is already taken by another user"
+#~ msgstr "Пользователь с таким именем уже существует"
+
+#~ msgid ""
+#~ "Necessary field. 150 characters max. Only letters, digits and symbols @/./"
+#~ "+/-/_."
+#~ msgstr ""
+#~ "Обязательное поле. Не более 150 символов. Только буквы, цифры и символы "
+#~ "@/./+/-/_."
+
+#~ msgid "Your password has to contain 3 characters at least."
+#~ msgstr "Ваш пароль должен содержать как минимум 3 символа."
+
+#~ msgid "For confirmation insert the password again, please."
+#~ msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
 
 #~ msgid "Such label does not exist"
 #~ msgstr "Такая метка не существует"

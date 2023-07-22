@@ -1,33 +1,33 @@
 {% extends '../layout.html' %}
-{% load bootstrap4 i18n %}
+{% load bootstrap5 i18n %}
 {% block content %}
-  <div class="container wrapper flex-grow-1">
-    <h1 class="my-4">{% translate 'Users' %}</h1>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>{% translate 'Username' %}</th>
-          <th>{% translate 'Full name' %}</th>
-          <th>{% translate 'Created at' %}</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for user in user_list %}
-        <tr>
-          <td>{{ user.id }}</td>
-          <td>{{ user.username }}</td>
-          <td>{{ user.first_name }} {{ user.last_name }}</td>
-          <td>{{ user.date_joined }}</td>
-          <td>
-            <a href="{% url 'user_update' user.id %}">{% translate 'Edit' %}</a>
-            <br>
-            <a href="{% url 'user_delete' user.id %}">{% translate 'Delete' %}</a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+
+<h1 class="my-4">{% translate 'Users' %}</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>{% translate 'Username' %}</th>
+      <th>{% translate 'Full name' %}</th>
+      <th>{% translate 'Created at' %}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in user_list %}
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.first_name }} {{ user.last_name }}</td>
+      <td>{{ user.date_joined }}</td>
+      <td>
+        <a href="{% url 'user_update' user.id %}">{% translate 'Edit' %}</a>
+        <br>
+        <a href="{% url 'user_delete' user.id %}">{% translate 'Delete' %}</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock content %}
