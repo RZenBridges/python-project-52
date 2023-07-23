@@ -83,6 +83,7 @@ class UserTest(TestCase):
                                                data={
                                                    'username': self.username2,
                                                    'password1': self.password,
+                                                   'password2': self.password,
                                                })
         self.assertContains(
             response_login_user,

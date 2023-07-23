@@ -1,55 +1,14 @@
 {% extends '../layout.html' %}
 {% load bootstrap5 i18n %}
 {% block content %}
-  <div class="container wrapper flex-grow-1">
-    <h1 class="my-4">{% translate "Create task" %}</h1>
-    <form method="post">
-      {% csrf_token %}
 
-      <div class="form-group">
-        {% translate form.name.label_tag %}
-        {{ form.name }}
-      </div>
-        {% for error in form.name.errors %}
-            <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
-        {% endfor %}
-
-
-      <div class="form-group">
-        {% translate form.description.label_tag %}
-        {{ form.description }}
-      </div>
-        {% for error in form.description.errors %}
-            <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
-        {% endfor %}
-
-      <div class="form-group">
-        {% translate form.status.label_tag %}
-        {{ form.status }}
-      </div>
-        {% for error in form.status.errors %}
-            <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
-        {% endfor %}
-
-      <div class="form-group">
-        {% translate form.executor.label_tag %}
-        {{ form.executor }}
-      </div>
-        {% for error in form.executor.errors %}
-            <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
-        {% endfor %}
-
-      <div class="form-group">
-        {% translate form.labels.label_tag %}
-        {{ form.labels }}
-      </div>
-        {% for error in form.labels.errors %}
-            <p class="alert alert-danger py-0 pl-2"><small>{{ error }}</small></p>
-        {% endfor %}
-
-      <div class="form-group">
-        <input class="btn btn-primary" type="submit" value="{% translate 'Create' %}">
-      </div>
-    </form>
+<h1 class="my-4">{% translate "Create task" %}</h1>
+<form method="post">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <div class="form-group">
+    <input class="btn btn-primary" type="submit" value="{% translate 'Create' %}">
   </div>
+</form>
+
 {% endblock content %}

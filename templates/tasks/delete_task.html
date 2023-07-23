@@ -1,14 +1,12 @@
 {% extends '../layout.html' %}
 {% load bootstrap5 i18n %}
 {% block content %}
-  <div class="container wrapper flex-grow-1">
 
-    <h1 class="my-4">{% translate 'Task deletion' %}</h1>
-    <p> {% translate 'Are you certain you want to delete the task' %} '{{ task.name }}' ?</p>
-    <form action="{% url 'task_delete' task.id %}" method="post">
-      {% csrf_token %}
-      <input class="btn btn-danger" type="submit" value="{% translate 'Yes, I am' %}">
-    </form>
+<h1 class="my-4">{% translate 'Task deletion' %}</h1>
+<p> {% translate 'Are you certain you want to delete the task' %} '{{ task.name }}' ?</p>
+<form action="{% url 'task_delete' task.id %}" method="post">
+  {% csrf_token %}
+  <input class="btn btn-danger" type="submit" value="{% translate 'Yes, I am' %}">
+</form>
 
-  </div>
 {% endblock content %}
