@@ -1,13 +1,10 @@
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-from django.shortcuts import HttpResponseRedirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
+from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
-from django.urls import reverse_lazy
 
 from .forms import TaskForm
 from .models import Task
@@ -36,39 +33,29 @@ class TaskCreateFormView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     form_class = TaskForm
     success_url = reverse_lazy('tasks')
     template_name = 'tasks/new_task.html'
+    success_message = _('The task has been created')
 
     def form_valid(self, form):
         user = self.request.user
         form.instance.author = user
-        messages.add_message(self.request, messages.SUCCESS, _('The task has been created'))
         return super().form_valid(form)
 
 
 # UPDATE TASK page
-class TaskUpdateView(LoginRequiredMixin, UpdateView):
+class TaskUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Task
     form_class = TaskForm
-
     template_name = 'tasks/update_task.html'
     success_url = reverse_lazy('tasks')
-
-    def form_valid(self, form):
-        self.object = form.save()
-        messages.add_message(self.request, messages.SUCCESS, _('The task has been updated'))
-        return HttpResponseRedirect(self.get_success_url())
+    success_message = _('The task has been updated')
 
 
 # DELETE TASK page
-class TaskDeleteView(TaskDeletionMixin, DeleteView):
+class TaskDeleteView(SuccessMessageMixin, TaskDeletionMixin, DeleteView):
     model = Task
-
     template_name = 'tasks/delete_task.html'
     success_url = reverse_lazy('tasks')
-
-    def form_valid(self, form):
-        self.object.delete()
-        messages.add_message(self.request, messages.SUCCESS, _('The task has been deleted'))
-        return HttpResponseRedirect(self.get_success_url())
+    success_message = _('The task has been deleted')
 
 
 # TASK DETAILS page

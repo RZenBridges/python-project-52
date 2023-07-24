@@ -1,7 +1,5 @@
-import re
-
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models.deletion import ProtectedError
 from django.shortcuts import redirect, HttpResponseRedirect
@@ -24,39 +22,40 @@ class MessageMixin(SuccessMessageMixin):
         return self.error_message % cleaned_data
 
 
-class NoPermissionMixin:
-    def handle_no_permission(self):
-        messages.error(self.request, self.permission_denied_message)
-        return HttpResponseRedirect(self.redirect_url)
-
-
-class AuthCheckRedirectMixin(LoginRequiredMixin):
+class NeedAuthMixin(LoginRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
-        user_id_from_link = int(re.search('(?<=\\/)[\\d+](?=\\/)', request.path_info)[0])
-
         if not request.user.is_authenticated:
-            self.permission_denied_message = _('You are not authenticated! Please, log in.')
-            self.redirect_url = self.login_url
-            return self.handle_no_permission()
+            messages.error(self.request, _('You are not authenticated! Please, log in.'))
+            return HttpResponseRedirect(self.get_login_url())
+        return super().dispatch(request, *args, **kwargs)
 
-        elif request.user.id != user_id_from_link:
-            self.permission_denied_message = _('You are not authorized to change other users.')
-            self.redirect_url = self.unauthorized_url
-            return self.handle_no_permission()
 
+class NeedPermitMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user == self.get_object()
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func():
+            messages.error(self.request, _('You are not authorized to change other users.'))
+            return HttpResponseRedirect(self.unauthorized_url)
+        return super().dispatch(request, *args, **kwargs)
+
+
+class SuccessLogoutMixin:
+    def dispatch(self, request, *args, **kwargs):
+        messages.add_message(request, messages.INFO, self.success_message)
         return super().dispatch(request, *args, **kwargs)
 
 
 class UserDeleteErrorMixin(DeletionMixin):
     def post(self, request, *args, **kwargs):
         try:
-            response = super().delete(request, *args, **kwargs)
+            response = self.delete(request, *args, **kwargs)
             messages.success(self.request, _('The user has been deleted'))
             return response
         except ProtectedError:
-            messages.error(self.request,
-                           _('You cannot delete the user that is ascribed a task'))
-            return HttpResponseRedirect(self.get_success_url())
+            messages.error(self.request, _('You cannot delete the user that is ascribed a task'))
+            return HttpResponseRedirect(self.unauthorized_url)
 
 
 class StatusDeleteErrorMixin(DeletionMixin):

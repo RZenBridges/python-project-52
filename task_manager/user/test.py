@@ -76,14 +76,11 @@ class UserTest(TestCase):
         self.assertTrue(self.user.is_authenticated)
 
     def test_login_wrong_form(self):
-        self.user = get_user_model().objects.create_user(username=self.username,
-                                                         password=self.password)
         response_login_user = self.client.post('/login/',
-                                               follow=True,
                                                data={
-                                                   'username': self.username2,
-                                                   'password1': self.password,
-                                                   'password2': self.password,
+                                                   'username': self.username,
+                                                   'password': self.password
+
                                                })
         self.assertContains(
             response_login_user,

@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
@@ -8,8 +7,8 @@ from django.views.generic.list import ListView
 
 from .forms import LogInForm, UserSignUpForm, UserUpdateForm
 from .models import User
-from task_manager.mixins import AuthCheckRedirectMixin, NoPermissionMixin,\
-    MessageMixin, UserDeleteErrorMixin
+from task_manager.mixins import (NeedAuthMixin, NeedPermitMixin, MessageMixin,
+                                 UserDeleteErrorMixin, SuccessLogoutMixin)
 
 
 # ALL USERS page
@@ -29,7 +28,7 @@ class UsersCreateFormView(SuccessMessageMixin, CreateView):
 
 
 # UPDATE USER page
-class UsersUpdateView(SuccessMessageMixin, NoPermissionMixin, AuthCheckRedirectMixin, UpdateView):
+class UsersUpdateView(SuccessMessageMixin, NeedAuthMixin, NeedPermitMixin, UpdateView):
     model = User
     form_class = UserUpdateForm
     template_name = 'users/update_user.html'
@@ -40,10 +39,10 @@ class UsersUpdateView(SuccessMessageMixin, NoPermissionMixin, AuthCheckRedirectM
 
 
 # DELETE USER page
-class UsersDeleteView(NoPermissionMixin, AuthCheckRedirectMixin,
-                      UserDeleteErrorMixin, DeleteView):
+class UsersDeleteView(NeedAuthMixin, NeedPermitMixin, UserDeleteErrorMixin, DeleteView):
     model = User
     template_name = 'users/delete_user.html'
+    login_url = reverse_lazy('login')
     unauthorized_url = reverse_lazy('users')
     success_url = reverse_lazy('users')
 
@@ -55,15 +54,11 @@ class UsersLoginView(MessageMixin, LoginView):
     redirect_authenticated_user = True
     template_name = 'login.html'
     next_page = reverse_lazy('home')
-
     success_message = _('You have logged in')
     error_message = _('Enter correct username and password. Both fields can be case-sensitive')
 
 
 # LOGOUT USER page
-class UsersLogoutView(LogoutView):
+class UsersLogoutView(SuccessLogoutMixin, LogoutView):
     next_page = reverse_lazy('home')
-
-    def dispatch(self, request, *args, **kwargs):
-        messages.add_message(request, messages.INFO, _('You have logged out'))
-        return super().dispatch(request, *args, **kwargs)
+    success_message = _('You have logged out')
