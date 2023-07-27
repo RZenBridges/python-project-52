@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 
 from .models import Status
 from .forms import StatusForm
-from task_manager.mixins import StatusDeleteErrorMixin
+from task_manager.mixins import DeleteErrorMixin
 
 
 # ALL STATUSES page
@@ -36,9 +36,10 @@ class StatusUpdateFormView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 
 # DELETE STATUS page
-class StatusDeleteView(SuccessMessageMixin, LoginRequiredMixin, StatusDeleteErrorMixin,
+class StatusDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteErrorMixin,
                        DeleteView):
     model = Status
     template_name = 'statuses/delete_status.html'
     success_url = reverse_lazy('statuses')
     success_message = _('The status has been deleted')
+    reject_message = _('You cannot delete the status that is used in a task')

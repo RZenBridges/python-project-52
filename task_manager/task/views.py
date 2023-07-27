@@ -4,7 +4,7 @@ from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic.list import ListView
+from django_filters.views import FilterView
 
 from .forms import TaskForm
 from .models import Task
@@ -13,18 +13,10 @@ from task_manager.mixins import TaskDeletionMixin
 
 
 # ALL TASKS page
-class TaskView(LoginRequiredMixin, ListView):
-    model = Task
+class TaskView(LoginRequiredMixin, FilterView):
+    filterset_class = TaskFilter
     template_name = 'tasks/tasks.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs.update(
-            {'filter': TaskFilter(
-                self.request.GET,
-                queryset=Task.objects.all().order_by('id'),
-                current_user=self.request.user)}
-        )
-        return kwargs
+    context_object_name = 'tasks'
 
 
 # CREATE TASK page

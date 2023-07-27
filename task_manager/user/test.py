@@ -34,6 +34,18 @@ class UserTest(TestCase):
             username=self.username,
         ))
 
+    def test_create_unique_user_form(self):
+        get_user_model().objects.create_user(first_name=self.first_name,
+                                             last_name=self.last_name,
+                                             username=self.username,
+                                             password=self.password)
+
+        response_register_user = self.client.post('/users/create/',
+                                                  follow=True,
+                                                  data=self.form_data)
+        self.assertEqual(response_register_user.status_code, 200)
+        self.assertEqual(self.users.count(), 1)
+
     def test_user_update_form(self):
         self.user = get_user_model().objects.create_user(username=self.username,
                                                          password=self.password)

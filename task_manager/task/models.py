@@ -19,13 +19,13 @@ class Task(models.Model):
     status = models.ForeignKey(
         Status,
         on_delete=models.PROTECT,
-        related_name='status',
+        related_name='status_tasks',
         verbose_name=_('status'),
     )
     author = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        related_name='author',
+        related_name='author_tasks',
         verbose_name=_('author'),
     )
     executor = models.ForeignKey(
@@ -33,7 +33,7 @@ class Task(models.Model):
         null=True,
         blank=True,
         on_delete=models.PROTECT,
-        related_name='executor',
+        related_name='executor_tasks',
         verbose_name=_('executor'),
     )
     labels = models.ManyToManyField(

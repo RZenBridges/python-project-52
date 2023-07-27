@@ -7,34 +7,9 @@
 
 <div class="card mb-3">
   <div class="card-body bg-light">
-    <form class="form-inline center" method="get">
-      <div class="form-group">
-        {% translate filter.form.status.label_tag %}
-        <div class="ml-2 mr-3">
-          {{ filter.form.status }}
-        </div>
-      </div>
-
-      <div class="form-group">
-        {% translate filter.form.executor.label_tag %}
-        <div class="mr-3 ml-2">
-            {{ filter.form.executor }}
-        </div>
-      </div>
-
-      <div class="form-group">
-        {% translate filter.form.labels.label_tag %}
-        <div class="mr-3 ml-2">
-             {{ filter.form.labels }}
-        </div>
-      </div>
-
-      <div class="form-group">
-          {{ filter.form.author.label_tag }}
-        <div class="mr-3 ml-2">
-          {{ filter.form.author }}
-        </div>
-      </div>
+    <form class="text-left" method="get">
+        {% csrf_token %}
+        {% bootstrap_form filter.form form_group_class="row mb-2" %}
       <div class="form-group">
         <input class="btn btn-primary text-right" type="submit" value="{% translate 'Show' %}">
       </div>
@@ -55,7 +30,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for task in filter.qs %}
+    {% for task in tasks %}
     <tr>
       <td>{{ task.id }}</td>
       <td><a href="{% url 'task_view' pk=task.id %}">{{ task.name }}</a></td>

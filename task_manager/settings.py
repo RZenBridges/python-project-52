@@ -63,6 +63,8 @@ MIDDLEWARE = [
     'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
+
 ROLLBAR = {
     'access_token': os.getenv('ROLLBAR_TOKEN'),
     'environment': 'development' if DEBUG else 'production',

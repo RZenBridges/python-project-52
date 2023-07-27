@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 
 from .forms import LabelForm
 from .models import Label
-from task_manager.mixins import LabelDeleteErrorMixin
+from task_manager.mixins import DeleteErrorMixin
 
 
 # ALL LABELS page
@@ -36,8 +36,9 @@ class LabelUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 
 # DELETE STATUS page
-class LabelDeleteView(SuccessMessageMixin, LoginRequiredMixin, LabelDeleteErrorMixin, DeleteView):
+class LabelDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteErrorMixin, DeleteView):
     model = Label
     template_name = 'labels/delete_label.html'
     success_url = reverse_lazy('labels')
     success_message = _('The label has been deleted')
+    reject_message = _('You cannot delete the label that is used in a task')

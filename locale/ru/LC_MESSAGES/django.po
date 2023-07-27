@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-24 15:20+0000\n"
+"POT-Creation-Date: 2023-07-26 15:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,40 +34,40 @@ msgid "The label has been updated"
 msgstr "Метка успешно изменена"
 
 #: task_manager/label/tests.py:48 task_manager/label/views.py:43
-#: task_manager/mixins.py:78
+#: task_manager/mixins.py:80
 msgid "The label has been deleted"
 msgstr "Метка успешно удалена"
 
-#: task_manager/mixins.py:38
+#: task_manager/mixins.py:28
 msgid "You are not authenticated! Please, log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: task_manager/mixins.py:43
+#: task_manager/mixins.py:39
 msgid "You are not authorized to change other users."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/mixins.py:54 task_manager/user/test.py:59
+#: task_manager/mixins.py:49 task_manager/user/test.py:59
 msgid "The user has been deleted"
 msgstr "Пользователь успешно удален"
 
-#: task_manager/mixins.py:58
+#: task_manager/mixins.py:51
 msgid "You cannot delete the user that is ascribed a task"
 msgstr "Невозможно удалить пользователя, потому что он задействован в задаче"
 
-#: task_manager/mixins.py:66 task_manager/status/tests.py:48
+#: task_manager/mixins.py:68 task_manager/status/tests.py:48
 #: task_manager/status/views.py:44
 msgid "The status has been deleted"
 msgstr "Статус успешно удален"
 
-#: task_manager/mixins.py:70
+#: task_manager/mixins.py:72
 msgid "You cannot delete the status that is used in a task"
 msgstr "Невозможно удалить статус, потому что он присвоен задаче"
 
-#: task_manager/mixins.py:82
+#: task_manager/mixins.py:84
 msgid "You cannot delete the label that is used in a task"
 msgstr "Невозможно удалить метку, потому что она присвоена задаче"
 
-#: task_manager/mixins.py:90
+#: task_manager/mixins.py:92
 msgid "You need to be the creator of the task to delete it"
 msgstr "Удалить задачу может только ее создатель"
 
@@ -158,11 +158,19 @@ msgstr "Задача успешно изменена"
 msgid "The task has been deleted"
 msgstr "Задача успешно удалена"
 
-#: task_manager/user/test.py:28 task_manager/user/views.py:28
+#: task_manager/user/forms.py:7
+msgid "First name"
+msgstr "Имя"
+
+#: task_manager/user/forms.py:8
+msgid "Last name"
+msgstr "Фамилия"
+
+#: task_manager/user/test.py:28 task_manager/user/views.py:29
 msgid "The user has been registered"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/user/test.py:44 task_manager/user/views.py:39
+#: task_manager/user/test.py:44 task_manager/user/views.py:40
 msgid "The user has been updated"
 msgstr "Пользователь успешно изменен"
 
@@ -176,7 +184,7 @@ msgstr ""
 "Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут "
 "быть чувствительны к регистру."
 
-#: task_manager/user/views.py:68
+#: task_manager/user/views.py:66
 msgid "You have logged out"
 msgstr "Вы разлогинены"
 
@@ -379,12 +387,6 @@ msgstr "Полное имя"
 
 #~ msgid "Password"
 #~ msgstr "Пароль"
-
-#~ msgid "First Name"
-#~ msgstr "Имя"
-
-#~ msgid "Last Name"
-#~ msgstr "Фамилия"
 
 #~ msgid "Password (again)"
 #~ msgstr "Пароль (еще раз)"
