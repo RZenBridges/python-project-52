@@ -18,7 +18,7 @@ class StatusView(LoginRequiredMixin, ListView):
 
 
 # CREATE STATUS page
-class StatusCreateFormView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+class StatusCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Status
     form_class = StatusForm
     template_name = 'statuses/new_status.html'

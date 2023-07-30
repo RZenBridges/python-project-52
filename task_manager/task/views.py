@@ -9,7 +9,8 @@ from django_filters.views import FilterView
 from .forms import TaskForm
 from .models import Task
 from .filters import TaskFilter
-from task_manager.mixins import TaskDeletionMixin
+from task_manager.mixins import HandleNoPermissionMixin
+from task_manager.task.mixins import TaskDeletionPermitMixin
 
 
 # ALL TASKS page
@@ -20,7 +21,7 @@ class TaskView(LoginRequiredMixin, FilterView):
 
 
 # CREATE TASK page
-class TaskCreateFormView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+class TaskCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy('tasks')
@@ -43,7 +44,8 @@ class TaskUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 
 # DELETE TASK page
-class TaskDeleteView(SuccessMessageMixin, TaskDeletionMixin, DeleteView):
+class TaskDeleteView(SuccessMessageMixin, HandleNoPermissionMixin, TaskDeletionPermitMixin,
+                     DeleteView):
     model = Task
     template_name = 'tasks/delete_task.html'
     success_url = reverse_lazy('tasks')

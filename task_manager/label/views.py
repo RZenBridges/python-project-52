@@ -18,7 +18,7 @@ class LabelView(LoginRequiredMixin, ListView):
 
 
 # CREATE LABEL page
-class LabelCreateFormView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+class LabelCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Label
     form_class = LabelForm
     template_name = 'labels/new_label.html'
