@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='task',
             name='status',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='status', to='status.status', verbose_name='status'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, name='status', to='status.status', verbose_name='status'),
         ),
         migrations.AddField(
             model_name='labeled',
